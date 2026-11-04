@@ -204,13 +204,13 @@
       Overnight crawl 23–24 Oct 2026 (Eastern). Diagnose-only. No site changes until Bruno approves each URL.
     </p>
     <p class="meta">
-      Mark a ticket done only when its retest has passed. T01, T03, and T04 are already checked because their retests passed.
+      Mark a ticket done only when its retest has passed. T01, T02, T03, T04, and T16 are already checked because their retests passed.
       They stay in this browser when you leave the page. Checking a box does not edit fivejourneys.com.
       Links to the live site open in a new tab.
     </p>
     <div class="progress" aria-live="polite">
-      <strong id="count">3 of 16</strong>
-      <span id="done-ids">done (T01, T03, T04)</span>
+      <strong id="count">5 of 16</strong>
+      <span id="done-ids">done (T01, T02, T03, T04, T16)</span>
     </div>
 
     <h2>At a glance</h2>
@@ -270,7 +270,7 @@
     <p class="meta">Slide the table sideways for the later columns. Done and Impact stay pinned on a wide screen. Ordered T01 through T16.</p>
     <div class="table-wrap">
       <table>
-        <caption>3 of 16 done (T01, T03, T04). Fifteen tickets from the overnight crawl, plus T16 from the 2 Nov mobile lab. Impact is High, Medium, or Low.</caption>
+        <caption>5 of 16 done (T01, T02, T03, T04, T16). Fifteen tickets from the overnight crawl, plus T16 from the 2 Nov mobile lab. Impact is High, Medium, or Low.</caption>
         <thead>
           <tr>
             <th class="done-col" scope="col">Done</th>
@@ -306,8 +306,8 @@
             <td>Turn Nitro (or LiteSpeed) cache back on for the live site, and leave Test Mode. A second visit to the same page should show that the saved copy was used (a cache HIT header).</td>
             <td>Done — cache HIT confirmed 26 Oct 2026. Optional next: re-run mobile Lighthouse on / and location pages (feeds T02).</td>
           </tr>
-          <tr id="T02" data-id="T02">
-            <td class="done-col"><input type="checkbox" autocomplete="off" aria-label="T02. Mobile LCP very slow on homepage and two high-traffic posts" /></td>
+          <tr id="T02" class="done" data-id="T02">
+            <td class="done-col"><input type="checkbox" checked autocomplete="off" aria-label="T02. Mobile LCP very slow on homepage and two high-traffic posts" /></td>
             <td class="impact-col"><span class="impact high">High</span></td>
             <td>T02</td>
             <td>
@@ -332,7 +332,7 @@
               Compress and resize the hero images on <a href="https://fivejourneys.com/welcome-to-425-boylston/" target="_blank" rel="noopener noreferrer">welcome-to-425-boylston/</a>.
               One URL at a time, and only after Bruno approves that URL.
             </td>
-            <td>Mobile lab main-content time under 4 seconds on each fixed URL. Later, compare real-visitor Core Web Vitals when field data exists.</td>
+            <td>Done 4 Nov 2026 — every URL is under 4 s on mobile (local Lighthouse, 3 warm runs, Nitro cache HIT, median): homepage 2.57 s and adrenal-fatigue post 3.50 s (2 Nov); <a href="https://fivejourneys.com/welcome-to-425-boylston/" target="_blank" rel="noopener noreferrer">Boston</a> 4.48 s → 2.95 s (3 Nov, compressed WebP hero and NitroPack lazy-load exclusion); <a href="https://fivejourneys.com/how-to-increase-adiponectin-the-fat-burning-hormone/" target="_blank" rel="noopener noreferrer">adiponectin post</a> 3.97 s → 2.87 s (4 Nov, featured image no longer lazy-loaded). Later, compare real-visitor Core Web Vitals when field data exists (T13).</td>
           </tr>
           <tr id="T03" class="done" data-id="T03">
             <td class="done-col"><input type="checkbox" checked autocomplete="off" aria-label="T03. Broken structured data (invalid JSON-LD) including homepage" /></td>
@@ -589,8 +589,8 @@
             <td>Open both URLs. If they are slow or fail, fold them into the cache and performance work. If they are gone, use a clean 404 or an intentional redirect.</td>
             <td>Both return a normal page quickly, or an intentional redirect or “gone” response.</td>
           </tr>
-          <tr id="T16" data-id="T16">
-            <td class="done-col"><input type="checkbox" autocomplete="off" aria-label="T16. Membership page slow on mobile (LCP 7.4 s)" /></td>
+          <tr id="T16" class="done" data-id="T16">
+            <td class="done-col"><input type="checkbox" checked autocomplete="off" aria-label="T16. Membership page slow on mobile (LCP 7.4 s)" /></td>
             <td class="impact-col"><span class="impact high">High</span></td>
             <td>T16</td>
             <td>
@@ -603,7 +603,7 @@
             <td>First measurement on 2 Nov 2026, not a measured regression. Median mobile LCP 7.38 s (7.38 / 7.71 / 7.09). Lab score 62.</td>
             <td>Tech support</td>
             <td>NitroPack lazy-load exclusion for this hero. Optionally, a smaller WebP version of the image too.</td>
-            <td>Mobile Lighthouse, 3 warm runs, median LCP under 4 s.</td>
+            <td>Done 4 Nov 2026 — median mobile LCP 7.62 s → 2.59 s (2.49 / 2.88 / 2.59), score 60 → 77, Nitro cache HIT, 3 warm runs. Two fixes: the hero is no longer lazy-loaded, and the Elementor fade-in entrance animations on hero columns <code>1ea739c9</code> and <code>6c1467f4</code> plus the empty slideshow background on <code>1ea739c9</code> were removed (Bruno approved). The hero image is the LCP element. Just above Google’s 2.5 s “good” line.</td>
           </tr>
         </tbody>
       </table>
@@ -638,7 +638,7 @@
             <td>Nov 2, ~11:09 AM</td>
             <td>4.48 s (4.74 / 4.48 / 3.92)</td>
             <td>—</td>
-            <td>No: ticket <a href="#T02">T02</a></td>
+            <td>Fixed: 2.95 s on Nov 3 (<a href="#T02">T02</a>)</td>
             <td>9.5 s / 54</td>
           </tr>
           <tr>
@@ -654,7 +654,7 @@
             <td>Nov 2, 3:59–4:01 PM</td>
             <td>7.38 s (7.38 / 7.71 / 7.09)</td>
             <td>62</td>
-            <td>No: ticket <a href="#T16">T16</a></td>
+            <td>Fixed: 2.59 s on Nov 4 (<a href="#T16">T16</a>)</td>
             <td>none (first test)</td>
           </tr>
         </tbody>
@@ -735,7 +735,7 @@
       }
 
       var saved = readSaved();
-      ["T01", "T03", "T04"].forEach(function (id) {
+      ["T01", "T02", "T03", "T04", "T16"].forEach(function (id) {
         if (saved[id] === undefined) {
           saved[id] = true;
         }
