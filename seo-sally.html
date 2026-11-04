@@ -364,10 +364,23 @@
       <li>Check structured data only where the visible page should earn a rich result. Schema that copies a bad fact is a defect.</li>
       <li>Keep Boston, Newton, and any future Five Journeys locations consistent across the location pages, the contact page, the FAQ, and the Google Business Profiles: hours, address, and clinicians.</li>
       <li>Read GA4, Google Search Console, Google Business Profile, Ahrefs, and BrightLocal data from Drawer A, the Postgres database Bruno’s Cursor agent loads on a schedule, with read-only access. SEO Sally uses those reports to see which queries, pages, and locations are gaining or losing visibility, and which visits turn into qualified bookings. From that, SEO Sally recommends what to do next, both the larger choices and the specific fixes, and SEO Sally traces the cause of each problem SEO Sally finds.</li>
-      <li>Watch Core Web Vitals from Search Console field data for the non-www property. Field data is the record of what real visitors experienced on their own phones and computers. A lab score is a single test on one machine, under conditions the tester chose. It can show a page worth opening. It cannot fill in for field data that Search Console does not have. When field data is missing, the ticket says it is missing.</li>
+      <li>Watch Core Web Vitals from real-visitor field data: the Chrome UX Report (CrUX), which Five Journeys' Cursor agent loads into Drawer A so the history stays in one place. Search Console's Core Web Vitals report uses the same data but has no API. Field data is the record of what real visitors experienced on their own phones and computers. A lab score is a single test on one machine, under conditions the tester chose. It can show a page worth opening. It cannot fill in for field data. When a page has too little traffic for field data, the ticket says so.</li>
       <li>Test a fixed set of patient questions in search and in AI answers, and record what those answers say about Five Journeys. Report qualified bookings, attended visits, nonbrand clicks, and validated AI citations on the same scope each month. Unknowns stay visible.</li>
       <li>Recommend the new pages, page expansions, and link opportunities the KPIs need. Each recommendation names the query, the page, and the evidence. Who writes or earns them is Bruno's call.</li>
       <li>Write notes in plain language, with the date and the URL.</li>
+    </ul>
+
+    <h2>Weekly rhythm</h2>
+    <ul>
+      <li><strong>Every weekday, around 1 PM ET:</strong> SEO Sally checks that every Drawer A source loaded after the noon run. She messages Bruno only when a source is missing, failed, or out of date.</li>
+      <li><strong>Every Monday, around 1:30 PM ET:</strong> SEO Sally reads the new weekly Core Web Vitals field data (CrUX) from Drawer A for the whole site and the homepage on mobile. She reports the week-over-week change and anything still failing, and she tells Bruno as soon as both pass.</li>
+      <li><strong>Every Friday, around 3 PM ET: weekly report to Bruno.</strong> The report has three parts:
+        <ol>
+          <li><strong>Work done this week:</strong> what SEO Sally did to move the KPIs, with each item tied to the KPI it serves, plus anything waiting on someone else.</li>
+          <li><strong>KPI pacing:</strong> each KPI against a straight-line pace from its 2026 baseline to its Dec 2027 target. Green means on or ahead of pace. Yellow means behind pace. Red means severely behind, roughly more than 25% short of where it should be by now. The targets are a minimum, not a ceiling.</li>
+          <li><strong>Next week:</strong> the 3–5 things SEO Sally recommends doing next to reach or beat the KPIs. Each one names the KPI it moves and what needs Bruno's approval. Before writing them, SEO Sally checks the last 30 days of discussion on the week's focus topics with the <a href="https://github.com/mvanhorn/last30days-skill">last30days</a> research tool (Reddit, Hacker News and the web), so the recommendations reflect current practice and not only older knowledge.</li>
+        </ol>
+      </li>
     </ul>
 
     <h2>How a change gets made</h2>
