@@ -97,7 +97,26 @@
     .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.85rem 0.9rem; }
     .stat strong { color: var(--accent); display: block; font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.1; }
     .stat span { color: var(--wire-label); font-size: 0.75rem; }
+    .chart-wrap { position: relative; }
     .chart-wrap svg { display: block; height: auto; width: 100%; }
+    .hover-tip {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 0.4rem;
+      color: var(--ink);
+      display: none;
+      font-size: 0.75rem;
+      left: 0;
+      line-height: 1.4;
+      padding: 0.4rem 0.55rem;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    .hover-tip.show { display: block; }
+    .hover-tip strong { font-weight: 650; }
     .legend { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.8125rem; margin-top: 0.35rem; }
     .legend i { display: inline-block; height: 0.55rem; width: 0.55rem; border-radius: 50%; margin-right: 0.35rem; }
     table { border-collapse: collapse; font-size: 0.8125rem; margin: 0; width: 100%; }
@@ -239,7 +258,60 @@
       Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
       return el;
     }
+    const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
     const launchIndex = days.findIndex((d) => d.label === "Sep 13");
+    function weekday(year, label) {
+      const parts = label.split(" ");
+      const date = new Date(Date.UTC(year, MONTHS[parts[0]], Number(parts[1])));
+      return WEEKDAYS[date.getUTCDay()];
+    }
+    function nearestIndex(svg, event, count, xAt) {
+      const rect = svg.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 780;
+      let best = 0;
+      let gap = Infinity;
+      for (let i = 0; i < count; i++) {
+        const distance = Math.abs(xAt(i) - x);
+        if (distance < gap) {
+          gap = distance;
+          best = i;
+        }
+      }
+      return best;
+    }
+    function attachHover(host, svg, count, xAt, textFor) {
+      const tip = document.createElement("div");
+      tip.className = "hover-tip";
+      host.appendChild(tip);
+      const guide = svgEl("line", {
+        y1: 16, y2: 264, stroke: "#264540", "stroke-width": 1, "stroke-dasharray": "3 3", visibility: "hidden"
+      });
+      svg.appendChild(guide);
+      const overlay = svgEl("rect", { x: 46, y: 16, width: 718, height: 248, fill: "transparent" });
+      overlay.style.cursor = "crosshair";
+      svg.appendChild(overlay);
+      overlay.addEventListener("pointermove", (event) => {
+        const index = nearestIndex(svg, event, count, xAt);
+        const x = xAt(index);
+        guide.setAttribute("x1", x);
+        guide.setAttribute("x2", x);
+        guide.setAttribute("visibility", "visible");
+        tip.innerHTML = textFor(index);
+        tip.classList.add("show");
+        const bounds = host.getBoundingClientRect();
+        let left = event.clientX - bounds.left + 14;
+        const top = Math.max(8, event.clientY - bounds.top - 36);
+        tip.style.left = "0px";
+        if (left + tip.offsetWidth > bounds.width - 8) left = event.clientX - bounds.left - tip.offsetWidth - 14;
+        tip.style.left = Math.max(8, left) + "px";
+        tip.style.top = top + "px";
+      });
+      overlay.addEventListener("pointerleave", () => {
+        guide.setAttribute("visibility", "hidden");
+        tip.classList.remove("show");
+      });
+    }
     function draw(hostId, series) {
       const host = document.getElementById(hostId);
       const w = 780, h = 300, pad = { t: 16, r: 16, b: 36, l: 46 };
@@ -286,6 +358,13 @@
       legend.className = "legend";
       legend.innerHTML = series.map((s) => `<span><i style="background:${s.color}"></i>${s.name}</span>`).join("");
       host.appendChild(legend);
+      attachHover(host, svg, days.length, xAt, (index) => {
+        const row = days[index];
+        return [...series].reverse().map((item) => {
+          const year = item.key.endsWith("2026") ? 2026 : 2025;
+          return `<div><strong>${weekday(year, row.label)}, ${row.label} ${year}</strong> ${row[item.key].toLocaleString("en-US")}</div>`;
+        }).join("");
+      });
     }
     function drawBookings() {
       const host = document.getElementById("bookings-line");
@@ -353,6 +432,10 @@
         `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`
       ].join("");
       host.appendChild(legend);
+      attachHover(host, svg, bookings.length, xAt, (index) => {
+        const row = bookings[index];
+        return `<strong>${weekday(2026, row.label)}, ${row.label}</strong> ${row.count.toLocaleString("en-US")} calls`;
+      });
     }
     draw("overall-line", [
       { key: "overall2025", name: "Overall 2025", color: COLORS.y2025, width: 1.75 },
