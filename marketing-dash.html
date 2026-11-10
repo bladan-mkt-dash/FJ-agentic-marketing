@@ -160,11 +160,11 @@
         <h2 id="overall">Overall sessions</h2>
         <p>Every session. 2026 is the solid line. 2025 is the lighter line.</p>
         <div class="chart-wrap" id="overall-line"></div>
-        <p class="chart-note">Y-axis: sessions. The dashed line is the Channel 5 start. Shaded bands are Channel 5 run times.</p>
+        <p class="chart-note">Y-axis: sessions. The dashed line is the Channel 5 start. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.</p>
         <h2 id="direct">Direct sessions</h2>
         <p>Direct visits, same calendar days.</p>
         <div class="chart-wrap" id="direct-line"></div>
-        <p class="chart-note">Y-axis: sessions. Shaded bands are Channel 5 run times.</p>
+        <p class="chart-note">Y-axis: sessions. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.</p>
         <h2 id="daily">Daily detail</h2>
         <div class="table-scroll">
           <table>
@@ -187,14 +187,14 @@
         <p>
           Each point is the date the discovery call was booked, from Sunday August 2
           through Saturday November 7. The trend line runs from September 13 through
-          November 7. Shaded bands are Channel 5 run times.
+          November 7. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.
         </p>
         <div class="stats">
           <div class="stat"><strong>728</strong><span>Calls booked · Aug 2–Nov 7</span></div>
           <div class="stat"><strong>403</strong><span>Sep 13–Nov 7, the trend window</span></div>
         </div>
         <div class="chart-wrap" id="bookings-line"></div>
-        <p class="chart-note">Y-axis: calls booked. The trend is a straight line fit to September 13–November 7.</p>
+        <p class="chart-note">Y-axis: calls booked. The trend is a straight line fit to September 13–November 7. The green band is Channel 5 bonus spots, October 2–9.</p>
 
         <h2 id="october">October, 2023–2026</h2>
         <p>Full month of October, counted on the date the call was booked.</p>
@@ -251,6 +251,7 @@
       axis: "#6b7f78",
       grid: "#d7e2de",
       band: "#9ec3e6",
+      bonus: "#6fbf84",
       trend: "#264540"
     };
     function svgEl(name, attrs) {
@@ -262,8 +263,9 @@
     const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
     const launchIndex = days.findIndex((d) => d.label === "Sep 13");
     const CHANNEL_BANDS = [["Sep 13", "Sep 15"], ["Sep 20", "Sep 22"], ["Oct 11", "Oct 13"], ["Oct 18", "Oct 20"]];
-    function shadeChannel5(svg, rows, xAt, pad, plotWidth, plotHeight) {
-      CHANNEL_BANDS.forEach(([start, end]) => {
+    const BONUS_BANDS = [["Oct 2", "Oct 9"]];
+    function shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, bands, fill) {
+      bands.forEach(([start, end]) => {
         const i0 = rows.findIndex((row) => row.label === start);
         const i1 = rows.findIndex((row) => row.label === end);
         if (i0 < 0 || i1 < 0) return;
@@ -271,9 +273,13 @@
         const x1 = Math.min(pad.l + plotWidth, xAt(i1 + 0.5));
         svg.appendChild(svgEl("rect", {
           x: x0, y: pad.t, width: Math.max(0, x1 - x0), height: plotHeight,
-          fill: COLORS.band, opacity: "0.55"
+          fill, opacity: "0.55"
         }));
       });
+    }
+    function shadeChannel5(svg, rows, xAt, pad, plotWidth, plotHeight) {
+      shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, CHANNEL_BANDS, COLORS.band);
+      shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, BONUS_BANDS, COLORS.bonus);
     }
     function weekday(year, label) {
       const parts = label.split(" ");
@@ -332,7 +338,7 @@
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
       const peak = Math.max(...days.flatMap((d) => series.map((s) => d[s.key])));
       const yMax = Math.ceil(peak / 100) * 100;
-      const svg = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", "aria-label": hostId === "overall-line" ? "Overall sessions, September 1 through November 8, 2025 and 2026, with Channel 5 run times shaded" : "Direct sessions, September 1 through November 8, 2025 and 2026, with Channel 5 run times shaded" });
+      const svg = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", "aria-label": hostId === "overall-line" ? "Overall sessions, September 1 through November 8, 2025 and 2026, with Channel 5 run times shaded and Channel 5 bonus spots shaded October 2 through 9" : "Direct sessions, September 1 through November 8, 2025 and 2026, with Channel 5 run times shaded and Channel 5 bonus spots shaded October 2 through 9" });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
         const val = Math.round(yMax - (yMax * i) / 4);
@@ -371,7 +377,7 @@
       host.appendChild(svg);
       const legend = document.createElement("div");
       legend.className = "legend";
-      legend.innerHTML = series.map((s) => `<span><i style="background:${s.color}"></i>${s.name}</span>`).join("") + `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`;
+      legend.innerHTML = series.map((s) => `<span><i style="background:${s.color}"></i>${s.name}</span>`).join("") + `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span><span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span>`;
       host.appendChild(legend);
       attachHover(host, svg, days.length, xAt, (index) => {
         const row = days[index];
@@ -391,7 +397,7 @@
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery calls booked each day from August 2 through November 7, with a trend from September 13 through November 7 and Channel 5 run times shaded"
+        "aria-label": "Discovery calls booked each day from August 2 through November 7, with a trend from September 13 through November 7, Channel 5 run times shaded, and Channel 5 bonus spots shaded October 2 through 9"
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
@@ -434,7 +440,8 @@
       legend.innerHTML = [
         `<span><i style="background:${COLORS.direct2026}"></i>Calls booked</span>`,
         `<span><i style="background:${COLORS.trend}"></i>Trend, Sep 13–Nov 7</span>`,
-        `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`
+        `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`,
+        `<span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, bookings.length, xAt, (index) => {
