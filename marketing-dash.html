@@ -187,15 +187,18 @@
         <h2 id="bookings">Discovery calls booked by date</h2>
         <p>
           Each point is the date the discovery call was booked, from Sunday August 2
-          through the morning of Friday November 13. The trend line runs from September 13 through
-          November 13. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.
+          through the morning of Friday November 13. 2026 is the darker line. 2025 is the
+          lighter line, on the same calendar day. Each year has its own trend, fit from
+          September 13 through November 13. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.
         </p>
         <div class="stats">
-          <div class="stat"><strong>765</strong><span>Calls booked · Aug 2–Nov 13</span></div>
-          <div class="stat"><strong>440</strong><span>Sep 13–Nov 13, the trend window</span></div>
+          <div class="stat"><strong>765</strong><span>2026 · Aug 2–Nov 13 · +27.9% vs 2025</span></div>
+          <div class="stat"><strong>598</strong><span>2025, same days</span></div>
+          <div class="stat"><strong>440</strong><span>2026 trend window · Sep 13–Nov 13 · +16.4%</span></div>
+          <div class="stat"><strong>378</strong><span>2025 trend window, same days</span></div>
         </div>
         <div class="chart-wrap" id="bookings-line"></div>
-        <p class="chart-note">Y-axis: calls booked. The trend is a straight line fit to September 13–November 13. The green band is Channel 5 bonus spots, October 2–9. The light blue band is November 8–10. November 13 is through this morning.</p>
+        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 13. The green band is Channel 5 bonus spots, October 2–9. The light blue band is November 8–10. November 13, 2026 is through this morning. November 13, 2025 is the full day.</p>
 
         <h2 id="october">October, 2023–2026</h2>
         <p>Full month of October, counted on the date the call was booked.</p>
@@ -243,7 +246,7 @@
   </div>
   <script>
     const days = [{"label":"Sep 1","overall2025":730,"overall2026":704,"direct2025":125,"direct2026":217},{"label":"Sep 2","overall2025":713,"overall2026":662,"direct2025":154,"direct2026":126},{"label":"Sep 3","overall2025":567,"overall2026":562,"direct2025":145,"direct2026":158},{"label":"Sep 4","overall2025":574,"overall2026":417,"direct2025":163,"direct2026":100},{"label":"Sep 5","overall2025":479,"overall2026":321,"direct2025":132,"direct2026":87},{"label":"Sep 6","overall2025":205,"overall2026":326,"direct2025":49,"direct2026":97},{"label":"Sep 7","overall2025":278,"overall2026":369,"direct2025":58,"direct2026":58},{"label":"Sep 8","overall2025":510,"overall2026":581,"direct2025":115,"direct2026":121},{"label":"Sep 9","overall2025":475,"overall2026":545,"direct2025":121,"direct2026":133},{"label":"Sep 10","overall2025":527,"overall2026":573,"direct2025":98,"direct2026":105},{"label":"Sep 11","overall2025":482,"overall2026":433,"direct2025":118,"direct2026":74},{"label":"Sep 12","overall2025":443,"overall2026":242,"direct2025":94,"direct2026":43},{"label":"Sep 13","overall2025":270,"overall2026":424,"direct2025":56,"direct2026":110},{"label":"Sep 14","overall2025":280,"overall2026":618,"direct2025":57,"direct2026":136},{"label":"Sep 15","overall2025":507,"overall2026":705,"direct2025":110,"direct2026":296},{"label":"Sep 16","overall2025":491,"overall2026":581,"direct2025":120,"direct2026":161},{"label":"Sep 17","overall2025":537,"overall2026":546,"direct2025":121,"direct2026":153},{"label":"Sep 18","overall2025":490,"overall2026":423,"direct2025":113,"direct2026":83},{"label":"Sep 19","overall2025":453,"overall2026":277,"direct2025":81,"direct2026":67},{"label":"Sep 20","overall2025":289,"overall2026":405,"direct2025":70,"direct2026":99},{"label":"Sep 21","overall2025":247,"overall2026":545,"direct2025":41,"direct2026":133},{"label":"Sep 22","overall2025":451,"overall2026":500,"direct2025":96,"direct2026":83},{"label":"Sep 23","overall2025":477,"overall2026":529,"direct2025":81,"direct2026":157},{"label":"Sep 24","overall2025":883,"overall2026":452,"direct2025":96,"direct2026":101},{"label":"Sep 25","overall2025":617,"overall2026":364,"direct2025":127,"direct2026":81},{"label":"Sep 26","overall2025":445,"overall2026":309,"direct2025":64,"direct2026":48},{"label":"Sep 27","overall2025":301,"overall2026":321,"direct2025":46,"direct2026":62},{"label":"Sep 28","overall2025":296,"overall2026":562,"direct2025":56,"direct2026":111},{"label":"Sep 29","overall2025":556,"overall2026":502,"direct2025":107,"direct2026":96},{"label":"Sep 30","overall2025":513,"overall2026":596,"direct2025":108,"direct2026":130},{"label":"Oct 1","overall2025":515,"overall2026":840,"direct2025":101,"direct2026":209},{"label":"Oct 2","overall2025":529,"overall2026":732,"direct2025":106,"direct2026":217},{"label":"Oct 3","overall2025":404,"overall2026":539,"direct2025":80,"direct2026":285},{"label":"Oct 4","overall2025":204,"overall2026":511,"direct2025":47,"direct2026":240},{"label":"Oct 5","overall2025":237,"overall2026":532,"direct2025":49,"direct2026":156},{"label":"Oct 6","overall2025":518,"overall2026":493,"direct2025":104,"direct2026":151},{"label":"Oct 7","overall2025":576,"overall2026":609,"direct2025":94,"direct2026":224},{"label":"Oct 8","overall2025":593,"overall2026":578,"direct2025":103,"direct2026":167},{"label":"Oct 9","overall2025":853,"overall2026":405,"direct2025":125,"direct2026":84},{"label":"Oct 10","overall2025":434,"overall2026":300,"direct2025":104,"direct2026":107},{"label":"Oct 11","overall2025":259,"overall2026":320,"direct2025":46,"direct2026":68},{"label":"Oct 12","overall2025":243,"overall2026":697,"direct2025":43,"direct2026":252},{"label":"Oct 13","overall2025":403,"overall2026":933,"direct2025":117,"direct2026":311},{"label":"Oct 14","overall2025":490,"overall2026":976,"direct2025":116,"direct2026":300},{"label":"Oct 15","overall2025":442,"overall2026":841,"direct2025":112,"direct2026":264},{"label":"Oct 16","overall2025":454,"overall2026":778,"direct2025":114,"direct2026":207},{"label":"Oct 17","overall2025":362,"overall2026":616,"direct2025":75,"direct2026":191},{"label":"Oct 18","overall2025":194,"overall2026":985,"direct2025":52,"direct2026":479},{"label":"Oct 19","overall2025":214,"overall2026":1019,"direct2025":54,"direct2026":343},{"label":"Oct 20","overall2025":446,"overall2026":873,"direct2025":115,"direct2026":306},{"label":"Oct 21","overall2025":454,"overall2026":993,"direct2025":114,"direct2026":285},{"label":"Oct 22","overall2025":428,"overall2026":1080,"direct2025":98,"direct2026":268},{"label":"Oct 23","overall2025":374,"overall2026":764,"direct2025":70,"direct2026":290},{"label":"Oct 24","overall2025":281,"overall2026":590,"direct2025":74,"direct2026":276},{"label":"Oct 25","overall2025":213,"overall2026":571,"direct2025":45,"direct2026":209},{"label":"Oct 26","overall2025":229,"overall2026":752,"direct2025":68,"direct2026":248},{"label":"Oct 27","overall2025":557,"overall2026":831,"direct2025":199,"direct2026":287},{"label":"Oct 28","overall2025":565,"overall2026":775,"direct2025":217,"direct2026":273},{"label":"Oct 29","overall2025":636,"overall2026":735,"direct2025":234,"direct2026":258},{"label":"Oct 30","overall2025":463,"overall2026":688,"direct2025":82,"direct2026":235},{"label":"Oct 31","overall2025":431,"overall2026":509,"direct2025":207,"direct2026":199},{"label":"Nov 1","overall2025":202,"overall2026":578,"direct2025":61,"direct2026":206},{"label":"Nov 2","overall2025":303,"overall2026":779,"direct2025":103,"direct2026":232},{"label":"Nov 3","overall2025":428,"overall2026":816,"direct2025":105,"direct2026":218},{"label":"Nov 4","overall2025":488,"overall2026":901,"direct2025":115,"direct2026":360},{"label":"Nov 5","overall2025":444,"overall2026":795,"direct2025":98,"direct2026":235},{"label":"Nov 6","overall2025":420,"overall2026":767,"direct2025":71,"direct2026":259},{"label":"Nov 7","overall2025":394,"overall2026":557,"direct2025":67,"direct2026":222},{"label":"Nov 8","overall2025":227,"overall2026":603,"direct2025":52,"direct2026":205},{"label":"Nov 9","overall2025":262,"overall2026":780,"direct2025":59,"direct2026":259},{"label":"Nov 10","overall2025":463,"overall2026":819,"direct2025":120,"direct2026":277},{"label":"Nov 11","overall2025":440,"overall2026":893,"direct2025":116,"direct2026":441},{"label":"Nov 12","overall2025":459,"overall2026":683,"direct2025":100,"direct2026":235},{"label":"Nov 13","overall2025":775,"overall2026":21,"direct2025":180,"direct2026":12}];
-    const bookings = [{"label":"Aug 2","count":8},{"label":"Aug 3","count":12},{"label":"Aug 4","count":11},{"label":"Aug 5","count":10},{"label":"Aug 6","count":9},{"label":"Aug 7","count":9},{"label":"Aug 8","count":2},{"label":"Aug 9","count":2},{"label":"Aug 10","count":10},{"label":"Aug 11","count":12},{"label":"Aug 12","count":12},{"label":"Aug 13","count":13},{"label":"Aug 14","count":1},{"label":"Aug 15","count":3},{"label":"Aug 16","count":1},{"label":"Aug 17","count":10},{"label":"Aug 18","count":12},{"label":"Aug 19","count":10},{"label":"Aug 20","count":11},{"label":"Aug 21","count":3},{"label":"Aug 22","count":5},{"label":"Aug 23","count":4},{"label":"Aug 24","count":2},{"label":"Aug 25","count":7},{"label":"Aug 26","count":13},{"label":"Aug 27","count":10},{"label":"Aug 28","count":9},{"label":"Aug 29","count":6},{"label":"Aug 30","count":4},{"label":"Aug 31","count":13},{"label":"Sep 1","count":9},{"label":"Sep 2","count":13},{"label":"Sep 3","count":8},{"label":"Sep 4","count":11},{"label":"Sep 5","count":3},{"label":"Sep 6","count":3},{"label":"Sep 7","count":5},{"label":"Sep 8","count":13},{"label":"Sep 9","count":11},{"label":"Sep 10","count":8},{"label":"Sep 11","count":6},{"label":"Sep 12","count":1},{"label":"Sep 13","count":4},{"label":"Sep 14","count":12},{"label":"Sep 15","count":6},{"label":"Sep 16","count":6},{"label":"Sep 17","count":10},{"label":"Sep 18","count":6},{"label":"Sep 19","count":0},{"label":"Sep 20","count":3},{"label":"Sep 21","count":12},{"label":"Sep 22","count":8},{"label":"Sep 23","count":6},{"label":"Sep 24","count":7},{"label":"Sep 25","count":5},{"label":"Sep 26","count":3},{"label":"Sep 27","count":3},{"label":"Sep 28","count":17},{"label":"Sep 29","count":5},{"label":"Sep 30","count":9},{"label":"Oct 1","count":13},{"label":"Oct 2","count":5},{"label":"Oct 3","count":5},{"label":"Oct 4","count":5},{"label":"Oct 5","count":15},{"label":"Oct 6","count":6},{"label":"Oct 7","count":10},{"label":"Oct 8","count":8},{"label":"Oct 9","count":7},{"label":"Oct 10","count":4},{"label":"Oct 11","count":4},{"label":"Oct 12","count":9},{"label":"Oct 13","count":12},{"label":"Oct 14","count":9},{"label":"Oct 15","count":7},{"label":"Oct 16","count":9},{"label":"Oct 17","count":3},{"label":"Oct 18","count":6},{"label":"Oct 19","count":12},{"label":"Oct 20","count":8},{"label":"Oct 21","count":7},{"label":"Oct 22","count":5},{"label":"Oct 23","count":5},{"label":"Oct 24","count":3},{"label":"Oct 25","count":4},{"label":"Oct 26","count":10},{"label":"Oct 27","count":9},{"label":"Oct 28","count":7},{"label":"Oct 29","count":12},{"label":"Oct 30","count":4},{"label":"Oct 31","count":4},{"label":"Nov 1","count":3},{"label":"Nov 2","count":10},{"label":"Nov 3","count":7},{"label":"Nov 4","count":11},{"label":"Nov 5","count":7},{"label":"Nov 6","count":9},{"label":"Nov 7","count":7},{"label":"Nov 8","count":2},{"label":"Nov 9","count":10},{"label":"Nov 10","count":6},{"label":"Nov 11","count":5},{"label":"Nov 12","count":12},{"label":"Nov 13","count":2}];
+    const bookings = [{"label":"Aug 2","count":8,"count2025":1},{"label":"Aug 3","count":12,"count2025":0},{"label":"Aug 4","count":11,"count2025":3},{"label":"Aug 5","count":10,"count2025":6},{"label":"Aug 6","count":9,"count2025":4},{"label":"Aug 7","count":9,"count2025":5},{"label":"Aug 8","count":2,"count2025":2},{"label":"Aug 9","count":2,"count2025":0},{"label":"Aug 10","count":10,"count2025":1},{"label":"Aug 11","count":12,"count2025":7},{"label":"Aug 12","count":12,"count2025":5},{"label":"Aug 13","count":13,"count2025":10},{"label":"Aug 14","count":1,"count2025":4},{"label":"Aug 15","count":3,"count2025":2},{"label":"Aug 16","count":1,"count2025":0},{"label":"Aug 17","count":10,"count2025":0},{"label":"Aug 18","count":12,"count2025":11},{"label":"Aug 19","count":10,"count2025":15},{"label":"Aug 20","count":11,"count2025":7},{"label":"Aug 21","count":3,"count2025":7},{"label":"Aug 22","count":5,"count2025":2},{"label":"Aug 23","count":4,"count2025":2},{"label":"Aug 24","count":2,"count2025":3},{"label":"Aug 25","count":7,"count2025":12},{"label":"Aug 26","count":13,"count2025":9},{"label":"Aug 27","count":10,"count2025":5},{"label":"Aug 28","count":9,"count2025":5},{"label":"Aug 29","count":6,"count2025":6},{"label":"Aug 30","count":4,"count2025":2},{"label":"Aug 31","count":13,"count2025":3},{"label":"Sep 1","count":9,"count2025":1},{"label":"Sep 2","count":13,"count2025":7},{"label":"Sep 3","count":8,"count2025":19},{"label":"Sep 4","count":11,"count2025":8},{"label":"Sep 5","count":3,"count2025":8},{"label":"Sep 6","count":3,"count2025":0},{"label":"Sep 7","count":5,"count2025":1},{"label":"Sep 8","count":13,"count2025":15},{"label":"Sep 9","count":11,"count2025":8},{"label":"Sep 10","count":8,"count2025":7},{"label":"Sep 11","count":6,"count2025":5},{"label":"Sep 12","count":1,"count2025":2},{"label":"Sep 13","count":4,"count2025":2},{"label":"Sep 14","count":12,"count2025":4},{"label":"Sep 15","count":6,"count2025":6},{"label":"Sep 16","count":6,"count2025":10},{"label":"Sep 17","count":10,"count2025":8},{"label":"Sep 18","count":6,"count2025":10},{"label":"Sep 19","count":0,"count2025":1},{"label":"Sep 20","count":3,"count2025":1},{"label":"Sep 21","count":12,"count2025":2},{"label":"Sep 22","count":8,"count2025":13},{"label":"Sep 23","count":6,"count2025":7},{"label":"Sep 24","count":7,"count2025":7},{"label":"Sep 25","count":5,"count2025":4},{"label":"Sep 26","count":3,"count2025":8},{"label":"Sep 27","count":3,"count2025":4},{"label":"Sep 28","count":17,"count2025":1},{"label":"Sep 29","count":5,"count2025":11},{"label":"Sep 30","count":9,"count2025":7},{"label":"Oct 1","count":13,"count2025":13},{"label":"Oct 2","count":5,"count2025":9},{"label":"Oct 3","count":5,"count2025":7},{"label":"Oct 4","count":5,"count2025":2},{"label":"Oct 5","count":15,"count2025":2},{"label":"Oct 6","count":6,"count2025":10},{"label":"Oct 7","count":10,"count2025":8},{"label":"Oct 8","count":8,"count2025":6},{"label":"Oct 9","count":7,"count2025":9},{"label":"Oct 10","count":4,"count2025":3},{"label":"Oct 11","count":4,"count2025":0},{"label":"Oct 12","count":9,"count2025":0},{"label":"Oct 13","count":12,"count2025":7},{"label":"Oct 14","count":9,"count2025":8},{"label":"Oct 15","count":7,"count2025":9},{"label":"Oct 16","count":9,"count2025":11},{"label":"Oct 17","count":3,"count2025":7},{"label":"Oct 18","count":6,"count2025":2},{"label":"Oct 19","count":12,"count2025":0},{"label":"Oct 20","count":8,"count2025":17},{"label":"Oct 21","count":7,"count2025":7},{"label":"Oct 22","count":5,"count2025":10},{"label":"Oct 23","count":5,"count2025":9},{"label":"Oct 24","count":3,"count2025":5},{"label":"Oct 25","count":4,"count2025":2},{"label":"Oct 26","count":10,"count2025":1},{"label":"Oct 27","count":9,"count2025":7},{"label":"Oct 28","count":7,"count2025":7},{"label":"Oct 29","count":12,"count2025":3},{"label":"Oct 30","count":4,"count2025":10},{"label":"Oct 31","count":4,"count2025":9},{"label":"Nov 1","count":3,"count2025":1},{"label":"Nov 2","count":10,"count2025":2},{"label":"Nov 3","count":7,"count2025":10},{"label":"Nov 4","count":11,"count2025":1},{"label":"Nov 5","count":7,"count2025":11},{"label":"Nov 6","count":9,"count2025":3},{"label":"Nov 7","count":7,"count2025":12},{"label":"Nov 8","count":2,"count2025":1},{"label":"Nov 9","count":10,"count2025":3},{"label":"Nov 10","count":6,"count2025":7},{"label":"Nov 11","count":5,"count2025":4},{"label":"Nov 12","count":12,"count2025":9},{"label":"Nov 13","count":2,"count2025":8}];
     const COLORS = {
       y2026: "#1565C0",
       y2025: "#9ec3e6",
@@ -254,7 +257,8 @@
       band: "#9ec3e6",
       bonus: "#6fbf84",
       late: "#9ec3e6",
-      trend: "#264540"
+      trend: "#264540",
+      trend2025: "#c9844a"
     };
     function svgEl(name, attrs) {
       const el = document.createElementNS("http://www.w3.org/2000/svg", name);
@@ -395,13 +399,13 @@
       const host = document.getElementById("bookings-line");
       const w = 780, h = 300, pad = { t: 16, r: 16, b: 36, l: 46 };
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
-      const peak = Math.max(...bookings.map((d) => d.count));
+      const peak = Math.max(...bookings.flatMap((d) => [d.count, d.count2025]));
       const yMax = Math.ceil(peak / 2) * 2;
       const svg = svgEl("svg", {
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery calls booked each day from August 2 through the morning of November 13, with a trend from September 13 through November 13, Channel 5 run times shaded, and Channel 5 bonus spots shaded October 2 through 9, and November 8 through 10 shaded light blue"
+        "aria-label": "Discovery calls booked each day from August 2 through the morning of November 13, 2026 as the darker line and 2025 as the lighter line, each with its own trend from September 13 through November 13, Channel 5 run times shaded, and Channel 5 bonus spots shaded October 2 through 9, and November 8 through 10 shaded light blue"
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
@@ -414,22 +418,30 @@
       const xAt = (i) => pad.l + (iw * i) / (bookings.length - 1);
       const yAt = (v) => pad.t + ih - (v / yMax) * ih;
       shadeChannel5(svg, bookings, xAt, pad, iw, ih);
-      const line = bookings.map((row, i) => `${i ? "L" : "M"}${xAt(i)},${yAt(row.count)}`).join(" ");
-      svg.appendChild(svgEl("path", { d: line, fill: "none", stroke: COLORS.direct2026, "stroke-width": 2.25 }));
-      const from = bookings.findIndex((d) => d.label === "Sep 13");
-      const to = bookings.findIndex((d) => d.label === "Nov 13");
-      let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
-      for (let i = from; i <= to; i++) {
-        const x = i - from;
-        const y = bookings[i].count;
-        sumX += x; sumY += y; sumXY += x * y; sumXX += x * x;
+      function seriesPath(key) {
+        return bookings.map((row, i) => `${i ? "L" : "M"}${xAt(i)},${yAt(row[key])}`).join(" ");
       }
-      const n = to - from + 1;
-      const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-      const intercept = (sumY - slope * sumX) / n;
-      const trend = `M${xAt(from)},${yAt(intercept)} L${xAt(to)},${yAt(intercept + slope * (n - 1))}`;
+      function trendPath(key) {
+        const from = bookings.findIndex((d) => d.label === "Sep 13");
+        const to = bookings.findIndex((d) => d.label === "Nov 13");
+        let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+        for (let i = from; i <= to; i++) {
+          const x = i - from;
+          const y = bookings[i][key];
+          sumX += x; sumY += y; sumXY += x * y; sumXX += x * x;
+        }
+        const n = to - from + 1;
+        const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+        const intercept = (sumY - slope * sumX) / n;
+        return `M${xAt(from)},${yAt(intercept)} L${xAt(to)},${yAt(intercept + slope * (n - 1))}`;
+      }
+      svg.appendChild(svgEl("path", { d: seriesPath("count2025"), fill: "none", stroke: COLORS.direct2025, "stroke-width": 1.75 }));
+      svg.appendChild(svgEl("path", { d: seriesPath("count"), fill: "none", stroke: COLORS.direct2026, "stroke-width": 2.25 }));
       svg.appendChild(svgEl("path", {
-        d: trend, fill: "none", stroke: COLORS.trend, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath("count2025"), fill: "none", stroke: COLORS.trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+      }));
+      svg.appendChild(svgEl("path", {
+        d: trendPath("count"), fill: "none", stroke: COLORS.trend, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       bookings.forEach((row, i) => {
         if (i % 14 !== 0) return;
@@ -442,15 +454,17 @@
       const legend = document.createElement("div");
       legend.className = "legend";
       legend.innerHTML = [
-        `<span><i style="background:${COLORS.direct2026}"></i>Calls booked</span>`,
-        `<span><i style="background:${COLORS.trend}"></i>Trend, Sep 13–Nov 13</span>`,
+        `<span><i style="background:${COLORS.direct2025}"></i>2025</span>`,
+        `<span><i style="background:${COLORS.direct2026}"></i>2026</span>`,
+        `<span><i style="background:${COLORS.trend2025}"></i>2025 trend</span>`,
+        `<span><i style="background:${COLORS.trend}"></i>2026 trend</span>`,
         `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`,
         `<span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span><span><i style="background:${COLORS.late}"></i>Nov 8–10</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, bookings.length, xAt, (index) => {
         const row = bookings[index];
-        return `<strong>${weekday(2026, row.label)}, ${row.label}</strong> ${row.count.toLocaleString("en-US")} calls`;
+        return `<div><strong>${weekday(2026, row.label)}, ${row.label} 2026</strong> ${row.count.toLocaleString("en-US")}</div><div><strong>${weekday(2025, row.label)}, ${row.label} 2025</strong> ${row.count2025.toLocaleString("en-US")}</div>`;
       });
     }
     draw("overall-line", [
