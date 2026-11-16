@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="ad.size" content="width=300,height=600" />
+  <meta name="viewport" content="width=300, height=600" />
+  <title>Five Journeys — Variation 2A — 300x600</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 300px; height: 600px; overflow: hidden; background: #faf8f5; }
+    #clickArea {
+      position: relative; width: 300px; height: 600px; box-sizing: border-box;
+      border: 1px solid #1d3531; background: #faf8f5; color: #1a2e2a;
+      font-family: Arial, Helvetica, sans-serif; cursor: pointer; overflow: hidden;
+    }
+    .frame { position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; }
+    .f1 { animation: show1 12s linear forwards; }
+    .f2 { animation: show2 12s linear forwards; }
+    .f3 { animation: show3 12s linear forwards; }
+    .hero { position: absolute; top: 0; left: 0; width: 100%; height: 360px; object-fit: cover; object-position: center 28%; }
+    .logo-chip { position: absolute; top: 10px; left: 10px; background: rgba(250,248,245,0.94); border-radius: 3px; padding: 5px 7px 4px; line-height: 0; }
+    .logo-chip img { height: 22px; width: auto; display: block; }
+    .f1-copy { position: absolute; left: 0; right: 0; bottom: 0; height: 238px; box-sizing: border-box; padding: 0 22px; background: #faf8f5; display: flex; align-items: center; }
+    .f1-copy p { margin: 0; font-size: 26px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+    .f2, .f3 { box-sizing: border-box; padding: 36px 26px; display: flex; flex-direction: column; justify-content: center; }
+    .wash { position: absolute; right: -70px; top: -80px; width: 240px; height: 240px; border-radius: 50%; background: #5da68a; opacity: 0.16; pointer-events: none; }
+    .lead { position: relative; margin: 0; font-size: 28px; line-height: 1.18; font-weight: 700; letter-spacing: -0.02em; }
+    .sub { position: relative; margin: 16px 0 0; font-size: 18px; line-height: 1.35; color: #3d524c; }
+    .brand { align-self: flex-start; flex: none; position: relative; height: 48px; width: auto; display: block; }
+    .prop { position: relative; margin: 20px 0 0; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
+    .cta { position: relative; align-self: flex-start; margin-top: 24px; background: #264540; color: #fff; font-size: 16px; font-weight: 700; padding: 14px 18px; border-radius: 4px; animation: nudge 12s ease forwards; }
+    @keyframes show1 { 0%, 30% { opacity: 1; } 33.4%, 100% { opacity: 0; } }
+    @keyframes show2 { 0%, 30% { opacity: 0; } 33.4%, 63.3% { opacity: 1; } 66.7%, 100% { opacity: 0; } }
+    @keyframes show3 { 0%, 63.3% { opacity: 0; } 66.7%, 100% { opacity: 1; } }
+    @keyframes nudge { 0%, 74% { transform: scale(1); } 80% { transform: scale(1.05); } 86%, 100% { transform: scale(1); } }
+  </style>
+  <script>
+    var utmSource = "adroll-v2a-300x600";
+    var utmCampaign = "mid-int_normlabs";
+    var clickTag = "https://fivejourneys.com/primary-care/?utm_source=adroll-v2a-300x600&utm_campaign=mid-int_normlabs";
+    function withUtm(url) {
+      var hash = "";
+      var hashAt = url.indexOf("#");
+      if (hashAt !== -1) { hash = url.slice(hashAt); url = url.slice(0, hashAt); }
+      if (!/[?&]utm_source=/i.test(url)) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "utm_source=" + encodeURIComponent(utmSource);
+      }
+      if (!/[?&]utm_campaign=/i.test(url)) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "utm_campaign=" + encodeURIComponent(utmCampaign);
+      }
+      return url + hash;
+    }
+    function openClickTag() {
+      var match = /[?&]clickTag=([^&]+)/i.exec(window.location.search);
+      window.open(withUtm(match ? decodeURIComponent(match[1]) : clickTag), "_blank");
+    }
+  </script>
+</head>
+<body>
+  <div id="clickArea" onclick="openClickTag()">
+    <div class="frame f1">
+      <img class="hero" src="hero.jpg" alt="A smiling couple outdoors" />
+      <div class="logo-chip"><img src="logo.png" alt="Five Journeys" /></div>
+      <div class="f1-copy"><p>Told your labs are &#39;normal&#39;&mdash;but still feel exhausted?</p></div>
+    </div>
+    <div class="frame f2">
+      <div class="wash"></div>
+      <p class="lead">We stop chasing symptoms.</p>
+      <p class="sub">Comprehensive testing for gut, hormones, fatigue &amp; toxins.</p>
+    </div>
+    <div class="frame f3">
+      <div class="wash"></div>
+      <img class="brand" src="logo.png" alt="Five Journeys" />
+      <p class="prop">Personalized functional medicine in Boston &amp; Newton.</p>
+      <div class="cta">Schedule Your Call</div>
+    </div>
+  </div>
+</body>
+</html>

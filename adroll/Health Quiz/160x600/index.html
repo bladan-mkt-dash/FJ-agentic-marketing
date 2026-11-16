@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="ad.size" content="width=160,height=600" />
+  <meta name="viewport" content="width=160, height=600" />
+  <title>Five Journeys — Variation 2B — 160x600</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 160px; height: 600px; overflow: hidden; background: #faf8f5; }
+    #clickArea {
+      position: relative; width: 160px; height: 600px; box-sizing: border-box;
+      border: 1px solid #1d3531; background: #faf8f5; color: #1a2e2a;
+      font-family: Arial, Helvetica, sans-serif; cursor: pointer; overflow: hidden;
+    }
+    .frame { position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; display: flex; flex-direction: column; }
+    .f1 { animation: show1 12s linear forwards; }
+    .f2 { animation: show2 12s linear forwards; }
+    .f3 { animation: show3 12s linear forwards; }
+    .hero { width: 100%; height: 148px; object-fit: cover; object-position: center 58%; flex: none; }
+    .logo-chip { position: absolute; top: 6px; left: 6px; background: rgba(250,248,245,0.94); border-radius: 3px; padding: 3px 4px; line-height: 0; }
+    .logo-chip img { height: 16px; width: auto; display: block; }
+    .f1-copy { flex: 1; display: flex; align-items: flex-start; padding: 16px 12px 18px; }
+    .f1-copy p { margin: 0; font-size: 16px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
+    .f2, .f3 { justify-content: center; padding: 18px 12px; box-sizing: border-box; }
+    .f2 { background: #e4f1eb; }
+    .f3 { background: #faf8f5; }
+    .wash { position: absolute; right: -40px; top: -30px; width: 150px; height: 150px; border-radius: 50%; background: #5da68a; opacity: 0.28; pointer-events: none; }
+    .f3 .wash { opacity: 0.16; }
+    .lead { position: relative; margin: 0; font-size: 16px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+    .brand { align-self: flex-start; flex: none; position: relative; height: 28px; width: auto; display: block; }
+    .prop { position: relative; margin: 14px 0 0; font-size: 15px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+    .cta { position: relative; align-self: flex-start; margin-top: 14px; background: #264540; color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; padding: 8px 10px; border-radius: 4px; animation: nudge 12s ease forwards; }
+    @keyframes show1 { 0%, 30% { opacity: 1; } 33.4%, 100% { opacity: 0; } }
+    @keyframes show2 { 0%, 30% { opacity: 0; } 33.4%, 63.3% { opacity: 1; } 66.7%, 100% { opacity: 0; } }
+    @keyframes show3 { 0%, 63.3% { opacity: 0; } 66.7%, 100% { opacity: 1; } }
+    @keyframes nudge { 0%, 74% { transform: scale(1); } 80% { transform: scale(1.04); } 86%, 100% { transform: scale(1); } }
+  </style>
+  <script>
+    var utmSource = "adroll-v2b-160x600";
+    var clickTag = "https://fivejourneys.com/primary-care/?utm_source=adroll-v2b-160x600";
+    function withUtm(url) {
+      if (/[?&]utm_source=/i.test(url)) return url;
+      var hash = ""; var hashAt = url.indexOf("#");
+      if (hashAt !== -1) { hash = url.slice(hashAt); url = url.slice(0, hashAt); }
+      return url + (url.indexOf("?") === -1 ? "?" : "&") + "utm_source=" + encodeURIComponent(utmSource) + hash;
+    }
+    function openClickTag() {
+      var match = /[?&]clickTag=([^&]+)/i.exec(window.location.search);
+      window.open(withUtm(match ? decodeURIComponent(match[1]) : clickTag), "_blank");
+    }
+  </script>
+</head>
+<body>
+  <div id="clickArea" onclick="openClickTag()">
+    <div class="frame f1">
+      <img class="hero" src="hero.jpg" alt="Dr. Wendie Trubow and Dr. Ed Levitan" />
+      <div class="logo-chip"><img src="logo.png" alt="Five Journeys" /></div>
+      <div class="f1-copy"><p>Not sure where to start with your health?</p></div>
+    </div>
+    <div class="frame f2">
+      <div class="wash"></div>
+      <p class="lead">Identify hidden triggers behind weight gain, brain fog &amp; digestive issues.</p>
+    </div>
+    <div class="frame f3">
+      <div class="wash"></div>
+      <img class="brand" src="logo.png" alt="Five Journeys" />
+      <p class="prop">Take our quick assessment or talk with our team.</p>
+      <div class="cta">Get Started</div>
+    </div>
+  </div>
+</body>
+</html>
