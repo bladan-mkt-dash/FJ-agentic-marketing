@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="ad.size" content="width=320,height=50" />
+  <meta name="viewport" content="width=320, height=50" />
+  <title>Five Journeys — Variation 1A — 320x50</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 320px; height: 50px; overflow: hidden; background: #faf8f5; }
+    #clickArea {
+      position: relative;
+      width: 320px;
+      height: 50px;
+      box-sizing: border-box;
+      border: 1px solid #1d3531;
+      background: #faf8f5;
+      color: #1a2e2a;
+      font-family: Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .frame {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px;
+      box-sizing: border-box;
+      opacity: 0;
+    }
+    .f1 { animation: show1 12s linear forwards; }
+    .f2 { animation: show2 12s linear forwards; }
+    .f3 { animation: show3 12s linear forwards; }
+    .logo { height: 30px; width: auto; display: block; flex: none; }
+    p { margin: 0; font-size: 12px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+    .stars { display: flex; gap: 2px; flex: none; }
+    .stars svg { display: block; width: 10px; height: 10px; }
+    .f2 p, .f3 p { font-size: 11px; line-height: 1.15; }
+    .cta {
+      margin-left: auto;
+      flex: none;
+      background: #264540;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+      animation: nudge 12s ease forwards;
+    }
+    @keyframes show1 {
+      0%, 30% { opacity: 1; }
+      33.4%, 100% { opacity: 0; }
+    }
+    @keyframes show2 {
+      0%, 30% { opacity: 0; }
+      33.4%, 63.3% { opacity: 1; }
+      66.7%, 100% { opacity: 0; }
+    }
+    @keyframes show3 {
+      0%, 63.3% { opacity: 0; }
+      66.7%, 100% { opacity: 1; }
+    }
+    @keyframes nudge {
+      0%, 74% { transform: scale(1); }
+      80% { transform: scale(1.04); }
+      86%, 100% { transform: scale(1); }
+    }
+  </style>
+  <script>
+    var utmSource = "adroll-v1a-320x50";
+    var utmCampaign = "highint_socprf";
+    var clickTag = "https://fivejourneys.com/primary-care/?utm_source=adroll-v1a-320x50&utm_campaign=highint_socprf";
+    function withUtm(url) {
+      var hash = "";
+      var hashAt = url.indexOf("#");
+      if (hashAt !== -1) { hash = url.slice(hashAt); url = url.slice(0, hashAt); }
+      if (!/[?&]utm_source=/i.test(url)) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "utm_source=" + encodeURIComponent(utmSource);
+      }
+      if (!/[?&]utm_campaign=/i.test(url)) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "utm_campaign=" + encodeURIComponent(utmCampaign);
+      }
+      return url + hash;
+    }
+    function openClickTag() {
+      var match = /[?&]clickTag=([^&]+)/i.exec(window.location.search);
+      var url = match ? decodeURIComponent(match[1]) : clickTag;
+      window.open(withUtm(url), "_blank");
+    }
+  </script>
+</head>
+<body>
+  <div id="clickArea" onclick="openClickTag()">
+    <div class="frame f1">
+      <img class="logo" src="logo.png" alt="Five Journeys" />
+      <p>Still searching for<br>real health answers?</p>
+    </div>
+    <div class="frame f2">
+      <div class="stars" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><path fill="#c4a15a" d="M10 1.5l2.3 4.7 5.2.7-3.8 3.6.9 5.2L10 13.2 5.4 15.7l.9-5.2L2.5 6.9l5.2-.7z"/></svg>
+        <svg viewBox="0 0 20 20"><path fill="#c4a15a" d="M10 1.5l2.3 4.7 5.2.7-3.8 3.6.9 5.2L10 13.2 5.4 15.7l.9-5.2L2.5 6.9l5.2-.7z"/></svg>
+        <svg viewBox="0 0 20 20"><path fill="#c4a15a" d="M10 1.5l2.3 4.7 5.2.7-3.8 3.6.9 5.2L10 13.2 5.4 15.7l.9-5.2L2.5 6.9l5.2-.7z"/></svg>
+        <svg viewBox="0 0 20 20"><path fill="#c4a15a" d="M10 1.5l2.3 4.7 5.2.7-3.8 3.6.9 5.2L10 13.2 5.4 15.7l.9-5.2L2.5 6.9l5.2-.7z"/></svg>
+        <svg viewBox="0 0 20 20"><path fill="#c4a15a" d="M10 1.5l2.3 4.7 5.2.7-3.8 3.6.9 5.2L10 13.2 5.4 15.7l.9-5.2L2.5 6.9l5.2-.7z"/></svg>
+      </div>
+      <p>7,437+ appointments<br>&amp; 200+ 5-star reviews</p>
+    </div>
+    <div class="frame f3">
+      <p>We take most insurance.</p>
+      <div class="cta">Schedule Your Call</div>
+    </div>
+  </div>
+</body>
+</html>

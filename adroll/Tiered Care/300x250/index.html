@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="ad.size" content="width=300,height=250" />
+  <meta name="viewport" content="width=300, height=250" />
+  <title>Five Journeys — Variation 1B — 300x250</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 300px; height: 250px; overflow: hidden; background: #faf8f5; }
+    #clickArea {
+      position: relative; width: 300px; height: 250px; box-sizing: border-box;
+      border: 1px solid #1d3531; background: #faf8f5; color: #1a2e2a;
+      font-family: Arial, Helvetica, sans-serif; cursor: pointer; overflow: hidden;
+    }
+    .frame { position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; }
+    .f1 { animation: show1 12s linear forwards; }
+    .f2 { animation: show2 12s linear forwards; }
+    .f3 { animation: show3 12s linear forwards; }
+    .hero { position: absolute; top: 0; left: 0; width: 300px; height: 158px; object-fit: cover; object-position: center 28%; }
+    .logo-chip { position: absolute; top: 8px; left: 8px; background: rgba(250,248,245,0.94); border-radius: 3px; padding: 4px 6px 3px; line-height: 0; }
+    .logo-chip img { height: 18px; width: auto; display: block; }
+    .f1-copy { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; box-sizing: border-box; padding: 8px 14px 10px; background: #faf8f5; display: flex; align-items: center; }
+    .f1-copy p { margin: 0; font-size: 16px; line-height: 1.18; font-weight: 700; letter-spacing: -0.02em; }
+    .f2, .f3 { box-sizing: border-box; padding: 16px 16px 14px; background: #faf8f5; display: flex; flex-direction: column; justify-content: center; }
+    .wash { position: absolute; right: -46px; top: -58px; width: 160px; height: 160px; border-radius: 50%; background: #5da68a; opacity: 0.16; pointer-events: none; }
+    .tiers { position: relative; display: flex; align-items: flex-end; gap: 5px; height: 18px; }
+    .tiers i { display: block; border-radius: 50%; background: #c4a15a; }
+    .tiers i:nth-child(1) { width: 7px; height: 7px; }
+    .tiers i:nth-child(2) { width: 10px; height: 10px; }
+    .tiers i:nth-child(3) { width: 13px; height: 13px; }
+    .tiers i:nth-child(4) { width: 16px; height: 16px; }
+    .stat { position: relative; margin: 10px 0 0; font-size: 15px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+    .stat span { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; color: #3d524c; }
+    .brand { align-self: flex-start; flex: none; position: relative; height: 30px; width: auto; display: block; }
+    .prop { position: relative; margin: 10px 0 0; font-size: 16px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
+    .cta { position: relative; align-self: flex-start; margin-top: 12px; background: #264540; color: #fff; font-size: 13px; font-weight: 700; padding: 9px 12px; border-radius: 4px; animation: nudge 12s ease forwards; }
+    @keyframes show1 { 0%, 30% { opacity: 1; } 33.4%, 100% { opacity: 0; } }
+    @keyframes show2 { 0%, 30% { opacity: 0; } 33.4%, 63.3% { opacity: 1; } 66.7%, 100% { opacity: 0; } }
+    @keyframes show3 { 0%, 63.3% { opacity: 0; } 66.7%, 100% { opacity: 1; } }
+    @keyframes nudge { 0%, 74% { transform: scale(1); } 80% { transform: scale(1.05); } 86%, 100% { transform: scale(1); } }
+  </style>
+  <script>
+    var utmSource = "adroll-v1b-300x250";
+    var utmCampaign = "highint_custcare";
+    var clickTag = "https://fivejourneys.com/membership/?utm_source=adroll-v1b-300x250&utm_campaign=highint_custcare";
+    function withUtm(url) {
+      var hash = "";
+      var hashAt = url.indexOf("#");
+      if (hashAt !== -1) { hash = url.slice(hashAt); url = url.slice(0, hashAt); }
+      if (!/[?&]utm_source=/i.test(url)) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "utm_source=" + encodeURIComponent(utmSource);
+      }
+      if (!/[?&]utm_campaign=/i.test(url)) {
+        url += (url.indexOf("?") === -1 ? "?" : "&") + "utm_campaign=" + encodeURIComponent(utmCampaign);
+      }
+      return url + hash;
+    }
+    function openClickTag() {
+      var match = /[?&]clickTag=([^&]+)/i.exec(window.location.search);
+      window.open(withUtm(match ? decodeURIComponent(match[1]) : clickTag), "_blank");
+    }
+  </script>
+</head>
+<body>
+  <div id="clickArea" onclick="openClickTag()">
+    <div class="frame f1">
+      <img class="hero" src="hero.jpg" alt="Dr. Wendie Trubow speaking with a patient" />
+      <div class="logo-chip"><img src="logo.png" alt="Five Journeys" /></div>
+      <div class="f1-copy"><p>Tired of rushed<br>10-minute doctor visits?</p></div>
+    </div>
+    <div class="frame f2">
+      <div class="wash"></div>
+      <div class="tiers" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <p class="stat">4 tailored membership tiers<span>From foundational care to 90-minute visits &amp; 24/7 access.</span></p>
+    </div>
+    <div class="frame f3">
+      <div class="wash"></div>
+      <img class="brand" src="logo.png" alt="Five Journeys" />
+      <p class="prop">Find the right plan<br>for your health goals.</p>
+      <div class="cta">Compare Memberships</div>
+    </div>
+  </div>
+</body>
+</html>

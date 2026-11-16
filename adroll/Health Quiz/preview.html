@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variation 2B — Health Quiz</title>
+  <style>
+    body { margin: 0; background: #e7eeeb; color: #1a2e2a; font-family: "Segoe UI", Arial, sans-serif; }
+    .wrap { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
+    p { color: #3d524c; line-height: 1.45; }
+    button { background: #264540; color: #fff; border: 0; border-radius: 4px; font: inherit; font-weight: 700; padding: 0.45rem 0.8rem; cursor: pointer; }
+    .unit { margin: 1.6rem 0 0; }
+    .unit h2 { font-size: 0.95rem; margin: 0 0 0.55rem; }
+    .frame { display: inline-block; background: #fff; padding: 12px; border: 1px dashed #b8c9c3; }
+    iframe { display: block; border: 0; }
+    a { color: #264540; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Variation 2B — Low-friction entry and health quiz</h1>
+    <p>Frames hold at 0–4s, 4–8s, and 8–12s. Every click goes to the primary-care page with that size’s source code.</p>
+    <p><button type="button" id="replay">Replay</button></p>
+    <section class="unit">
+      <h2>300×250 · utm_source=adroll-v2b-300x250</h2>
+      <div class="frame"><iframe src="300x250/index.html" width="300" height="250" title="300x250"></iframe></div>
+      <p><a href="five-journeys-v2b-300x250.zip">five-journeys-v2b-300x250.zip</a></p>
+    </section>
+    <section class="unit">
+      <h2>728×90 · utm_source=adroll-v2b-728x90</h2>
+      <div class="frame"><iframe src="728x90/index.html" width="728" height="90" title="728x90"></iframe></div>
+      <p><a href="five-journeys-v2b-728x90.zip">five-journeys-v2b-728x90.zip</a></p>
+    </section>
+    <section class="unit">
+      <h2>300×600 · utm_source=adroll-v2b-300x600</h2>
+      <div class="frame"><iframe src="300x600/index.html" width="300" height="600" title="300x600"></iframe></div>
+      <p><a href="five-journeys-v2b-300x600.zip">five-journeys-v2b-300x600.zip</a></p>
+    </section>
+    <section class="unit">
+      <h2>160×600 · utm_source=adroll-v2b-160x600</h2>
+      <div class="frame"><iframe src="160x600/index.html" width="160" height="600" title="160x600"></iframe></div>
+      <p><a href="five-journeys-v2b-160x600.zip">five-journeys-v2b-160x600.zip</a></p>
+    </section>
+    <section class="unit">
+      <h2>320×50 · utm_source=adroll-v2b-320x50</h2>
+      <div class="frame"><iframe src="320x50/index.html" width="320" height="50" title="320x50"></iframe></div>
+      <p><a href="five-journeys-v2b-320x50.zip">five-journeys-v2b-320x50.zip</a></p>
+    </section>
+    <section class="unit">
+      <h2>970×250 · utm_source=adroll-v2b-970x250</h2>
+      <div class="frame"><iframe src="970x250/index.html" width="970" height="250" title="970x250"></iframe></div>
+      <p><a href="five-journeys-v2b-970x250.zip">five-journeys-v2b-970x250.zip</a></p>
+    </section>
+  </div>
+  <script>
+    document.getElementById("replay").onclick = function () {
+      document.querySelectorAll("iframe").forEach(function (frame) { frame.src = frame.src; });
+    };
+  </script>
+</body>
+</html>
