@@ -164,11 +164,11 @@
         <h2 id="overall">Overall sessions</h2>
         <p>Every session. 2026 is the solid line. 2025 is the lighter line.</p>
         <div class="chart-wrap" id="overall-line"></div>
-        <p class="chart-note">Y-axis: sessions. The dashed line is the Channel 5 start. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9. The light blue band is November 8–10.</p>
+        <p class="chart-note">Y-axis: sessions. The dashed line is the Channel 5 start. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.</p>
         <h2 id="direct">Direct sessions</h2>
         <p>Direct visits, same calendar days.</p>
         <div class="chart-wrap" id="direct-line"></div>
-        <p class="chart-note">Y-axis: sessions. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9. The light blue band is November 8–10.</p>
+        <p class="chart-note">Y-axis: sessions. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.</p>
         <h2 id="daily">Daily detail</h2>
         <div class="table-scroll">
           <table>
@@ -192,7 +192,7 @@
           Each point is the Eastern Time date the discovery call was booked, from Sunday August 2
           through Monday November 16. 2026 is the darker line. 2025 is the
           lighter line, on the same calendar day. Each year has its own trend, fit from
-          September 13 through November 16. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.
+          September 13 through November 16. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.
         </p>
         <div class="stats">
           <div class="stat"><strong>791</strong><span>2026 · Aug 2–Nov 16 · +31.8% vs 2025</span></div>
@@ -201,7 +201,7 @@
           <div class="stat"><strong>381</strong><span>2025 trend window, same days</span></div>
         </div>
         <div class="chart-wrap" id="bookings-line"></div>
-        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 16. The green band is Channel 5 bonus spots, October 2–9. The light blue band is November 8–10. November 16 is a full day for both years.</p>
+        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 16. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9. November 16 is a full day for both years.</p>
 
 
         <h2 id="confirmed">Confirmed and showed</h2>
@@ -209,7 +209,7 @@
           The same booking dates as the chart above, limited to appointments whose current
           status is Confirmed or Showed. 2026 is the darker line. 2025 is the lighter line,
           on the same calendar day. Each year has its own trend, fit from September 13 through
-          November 16. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9.
+          November 16. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.
         </p>
         <div class="stats">
           <div class="stat"><strong>563</strong><span>2026 · Aug 2–Nov 16 · +5.0% vs 2025</span></div>
@@ -218,7 +218,7 @@
           <div class="stat"><strong>336</strong><span>2025 trend window, same days</span></div>
         </div>
         <div class="chart-wrap" id="confirmed-line"></div>
-        <p class="chart-note">Y-axis: calls booked that are still Confirmed or Showed. Each trend is a straight line fit to September 13–November 16. Blue bands are Channel 5 run times. The green band is Channel 5 bonus spots, October 2–9. Showed is rarely marked, so most of these are still Confirmed.</p>
+        <p class="chart-note">Y-axis: calls booked that are still Confirmed or Showed. Each trend is a straight line fit to September 13–November 16, in that year’s line color. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9. Showed is rarely marked, so most of these are still Confirmed.</p>
 
         <h2 id="october">October, 2023–2026</h2>
         <p>Full month of October, counted on the date the call was booked.</p>
@@ -301,7 +301,6 @@
       grid: "#d7e2de",
       band: "#9ec3e6",
       bonus: "#6fbf84",
-      late: "#9ec3e6",
       trend: "#264540",
       trend2025: "#c9844a"
     };
@@ -313,9 +312,8 @@
     const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
     const launchIndex = days.findIndex((d) => d.label === "Sep 13");
-    const CHANNEL_BANDS = [["Sep 13", "Sep 15"], ["Sep 20", "Sep 22"], ["Oct 11", "Oct 13"], ["Oct 18", "Oct 20"]];
+    const CHANNEL_BANDS = [["Sep 13", "Sep 15"], ["Sep 20", "Sep 22"], ["Oct 11", "Oct 13"], ["Oct 18", "Oct 20"], ["Nov 8", "Nov 10"]];
     const BONUS_BANDS = [["Oct 2", "Oct 9"]];
-    const LATE_BANDS = [["Nov 8", "Nov 10"]];
     function shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, bands, fill) {
       bands.forEach(([start, end]) => {
         const i0 = rows.findIndex((row) => row.label === start);
@@ -332,7 +330,6 @@
     function shadeChannel5(svg, rows, xAt, pad, plotWidth, plotHeight) {
       shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, CHANNEL_BANDS, COLORS.band);
       shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, BONUS_BANDS, COLORS.bonus);
-      shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, LATE_BANDS, COLORS.late);
     }
     function weekday(year, label) {
       const parts = label.split(" ");
@@ -391,7 +388,7 @@
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
       const peak = Math.max(...days.flatMap((d) => series.map((s) => d[s.key])));
       const yMax = Math.ceil(peak / 100) * 100;
-      const svg = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", "aria-label": hostId === "overall-line" ? "Overall sessions, September 1 through November 16, 2025 and 2026, with Channel 5 run times shaded and Channel 5 bonus spots shaded October 2 through 9, and November 8 through 10 shaded light blue" : "Direct sessions, September 1 through November 16, 2025 and 2026, with Channel 5 run times shaded and Channel 5 bonus spots shaded October 2 through 9, and November 8 through 10 shaded light blue" });
+      const svg = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", "aria-label": hostId === "overall-line" ? "Overall sessions, September 1 through November 16, 2025 and 2026, with Channel 5 run times shaded, including November 8 through 10, and Channel 5 bonus spots shaded October 2 through 9" : "Direct sessions, September 1 through November 16, 2025 and 2026, with Channel 5 run times shaded, including November 8 through 10, and Channel 5 bonus spots shaded October 2 through 9" });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
         const val = Math.round(yMax - (yMax * i) / 4);
@@ -430,7 +427,7 @@
       host.appendChild(svg);
       const legend = document.createElement("div");
       legend.className = "legend";
-      legend.innerHTML = series.map((s) => `<span><i style="background:${s.color}"></i>${s.name}</span>`).join("") + `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span><span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span><span><i style="background:${COLORS.late}"></i>Nov 8–10</span>`;
+      legend.innerHTML = series.map((s) => `<span><i style="background:${s.color}"></i>${s.name}</span>`).join("") + `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span><span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span>`;
       host.appendChild(legend);
       attachHover(host, svg, days.length, xAt, (index) => {
         const row = days[index];
@@ -441,7 +438,9 @@
       });
     }
 
-    function drawOutcome(hostId, key2026, key2025, aria, color2026, color2025) {
+    function drawOutcome(hostId, key2026, key2025, aria, color2026, color2025, matchTrends) {
+      const trend2026 = matchTrends ? color2026 : COLORS.trend;
+      const trend2025 = matchTrends ? color2025 : COLORS.trend2025;
       const host = document.getElementById(hostId);
       const w = 780, h = 300, pad = { t: 16, r: 16, b: 36, l: 46 };
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
@@ -507,10 +506,10 @@
         });
       });
       svg.appendChild(svgEl("path", {
-        d: trendPath(key2025), fill: "none", stroke: COLORS.trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath(key2025), fill: "none", stroke: trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       svg.appendChild(svgEl("path", {
-        d: trendPath(key2026), fill: "none", stroke: COLORS.trend, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath(key2026), fill: "none", stroke: trend2026, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       outcomes.forEach((row, i) => {
         if (i % 14 !== 0 || !row.label) return;
@@ -525,8 +524,8 @@
       legend.innerHTML = [
         `<span><i style="background:${color2025}"></i>2025</span>`,
         `<span><i style="background:${color2026}"></i>2026</span>`,
-        `<span><i style="background:${COLORS.trend2025}"></i>2025 trend</span>`,
-        `<span><i style="background:${COLORS.trend}"></i>2026 trend</span>`
+        `<span><i style="background:${trend2025}"></i>2025 trend</span>`,
+        `<span><i style="background:${trend2026}"></i>2026 trend</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, outcomes.length, xAt, (index) => {
@@ -550,7 +549,7 @@
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery calls booked that are still Confirmed or Showed, August 2 through November 16. 2026 is the darker line and 2025 is the lighter line. Each trend runs from September 13 through November 16. Channel 5 run times and bonus spots are shaded."
+        "aria-label": "Discovery calls booked that are still Confirmed or Showed, August 2 through November 16. 2026 is the darker line and 2025 is the lighter line. Each trend matches that year's line color and runs from September 13 through November 16. Channel 5 run times, including November 8 through 10, and bonus spots are shaded."
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
@@ -584,10 +583,10 @@
       svg.appendChild(svgEl("path", { d: seriesPath("count2025"), fill: "none", stroke: COLORS.y2025, "stroke-width": 1.75 }));
       svg.appendChild(svgEl("path", { d: seriesPath("count"), fill: "none", stroke: COLORS.y2026, "stroke-width": 2.25 }));
       svg.appendChild(svgEl("path", {
-        d: trendPath("count2025"), fill: "none", stroke: COLORS.trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath("count2025"), fill: "none", stroke: COLORS.y2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       svg.appendChild(svgEl("path", {
-        d: trendPath("count"), fill: "none", stroke: COLORS.trend, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath("count"), fill: "none", stroke: COLORS.y2026, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       confirmed.forEach((row, i) => {
         if (i % 14 !== 0) return;
@@ -602,8 +601,8 @@
       legend.innerHTML = [
         `<span><i style="background:${COLORS.y2025}"></i>2025</span>`,
         `<span><i style="background:${COLORS.y2026}"></i>2026</span>`,
-        `<span><i style="background:${COLORS.trend2025}"></i>2025 trend</span>`,
-        `<span><i style="background:${COLORS.trend}"></i>2026 trend</span>`,
+        `<span><i style="background:${COLORS.y2025}"></i>2025 trend</span>`,
+        `<span><i style="background:${COLORS.y2026}"></i>2026 trend</span>`,
         `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`,
         `<span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span>`
       ].join("");
@@ -623,7 +622,7 @@
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery calls booked each day from August 2 through November 16, 2026 as the darker line and 2025 as the lighter line, each with its own trend from September 13 through November 16, Channel 5 run times shaded, and Channel 5 bonus spots shaded October 2 through 9, and November 8 through 10 shaded light blue"
+        "aria-label": "Discovery calls booked each day from August 2 through November 16, 2026 as the darker line and 2025 as the lighter line, each with its own trend from September 13 through November 16, Channel 5 run times shaded, including November 8 through 10, and Channel 5 bonus spots shaded October 2 through 9"
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
@@ -677,7 +676,7 @@
         `<span><i style="background:${COLORS.trend2025}"></i>2025 trend</span>`,
         `<span><i style="background:${COLORS.trend}"></i>2026 trend</span>`,
         `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`,
-        `<span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span><span><i style="background:${COLORS.late}"></i>Nov 8–10</span>`
+        `<span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, bookings.length, xAt, (index) => {
@@ -701,7 +700,8 @@
       "cancel2025",
       "Discovery call cancellations from August 15, with a straight trend for 2026 and a straight trend for 2025.",
       COLORS.y2026,
-      COLORS.y2025
+      COLORS.y2025,
+      true
     );
     drawOutcome(
       "no-shows-line",
