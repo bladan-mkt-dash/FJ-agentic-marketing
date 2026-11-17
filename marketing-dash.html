@@ -94,6 +94,7 @@
     .meta { font-size: 0.8rem; margin: 0 0 1.25rem; }
     .stats { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 0 0.5rem; }
     @media (min-width: 720px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    @media (min-width: 720px) { .stats.pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.85rem 0.9rem; }
     .stat strong { color: var(--accent); display: block; font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.1; }
     .stat span { color: var(--wire-label); font-size: 0.75rem; }
@@ -140,7 +141,8 @@
         <a href="#bookings">Discovery calls booked</a>
         <a href="#october">October comparison</a>
         <a href="#stretch">Sunday–Saturday stretch</a>
-        <a href="#cancellations">Cancellations and no-shows</a>
+        <a href="#cancellations">Cancellations</a>
+        <a href="#no-shows">No-shows</a>
       </nav>
     </aside>
     <main class="main">
@@ -242,21 +244,27 @@
         </div>
         <p class="chart-note">Source: GoHighLevel. 2026 is 55 calls ahead of 2025, about 16 percent. Sign-ups are committed members, counted on the sign-up date.</p>
 
-        <h2 id="cancellations">Discovery call cancellations and no-shows</h2>
+        <h2 id="cancellations">Discovery call cancellations</h2>
         <p>
           Each point is the Eastern Time date the discovery call was scheduled.
           2026 is Saturday, August 1 through Monday, November 16. 2025 is the same
           weekdays, Saturday, August 2 through Monday, November 17, plus Tuesday,
-          November 18. Cancellations are blue. No-shows are orange.
+          November 18. 2026 is the darker line.
         </p>
-        <div class="stats">
-          <div class="stat"><strong>101</strong><span>2026 cancellations · Aug 1–Nov 16 · +206.1% vs 2025</span></div>
-          <div class="stat"><strong>33</strong><span>2025 cancellations · Aug 2–Nov 18</span></div>
-          <div class="stat"><strong>130</strong><span>2026 no-shows · Aug 1–Nov 16 · +441.7% vs 2025</span></div>
-          <div class="stat"><strong>24</strong><span>2025 no-shows · Aug 2–Nov 18</span></div>
+        <div class="stats pair">
+          <div class="stat"><strong>101</strong><span>2026 · Aug 1–Nov 16 · +206.1% vs 2025</span></div>
+          <div class="stat"><strong>33</strong><span>2025 · Aug 2–Nov 18</span></div>
         </div>
-        <div class="chart-wrap" id="outcomes-line"></div>
-        <p class="chart-note">Source: GoHighLevel discovery-call calendars. A cancellation or no-show is the current appointment status, counted on the scheduled date. Many 2025 statuses were updated months after the call. 2025 sits one day to the right so each point is the same weekday. The last point is November 18, 2025 only.</p>
+        <div class="chart-wrap" id="cancellations-line"></div>
+        <p class="chart-note">Y-axis: cancellations. 2025 sits one day to the right so each point is the same weekday. The last point is November 18, 2025 only.</p>
+        <h2 id="no-shows">Discovery call no-shows</h2>
+        <p>Same scheduled dates and weekday alignment. 2026 is the darker line.</p>
+        <div class="stats pair">
+          <div class="stat"><strong>130</strong><span>2026 · Aug 1–Nov 16 · +441.7% vs 2025</span></div>
+          <div class="stat"><strong>24</strong><span>2025 · Aug 2–Nov 18</span></div>
+        </div>
+        <div class="chart-wrap" id="no-shows-line"></div>
+        <p class="chart-note">Y-axis: no-shows. Source: GoHighLevel discovery-call calendars. A cancellation or no-show is the current appointment status, counted on the scheduled date. Many 2025 statuses were updated months after the call.</p>
         <footer>Five Journeys · Channel 5 Impact · Updated through November 16</footer>
       </section>
     </main>
@@ -414,18 +422,18 @@
       });
     }
 
-    function drawOutcomes() {
-      const host = document.getElementById("outcomes-line");
+    function drawOutcome(hostId, key2026, key2025, aria, color2026, color2025) {
+      const host = document.getElementById(hostId);
       const w = 780, h = 300, pad = { t: 16, r: 16, b: 36, l: 46 };
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
-      const values = outcomes.flatMap((row) => [row.cancel, row.cancel2025, row.noshow, row.noshow2025].filter((value) => value != null));
+      const values = outcomes.flatMap((row) => [row[key2026], row[key2025]].filter((value) => value != null));
       const peak = Math.max(...values);
       const yMax = Math.max(2, Math.ceil((peak + 1) / 2) * 2);
       const svg = svgEl("svg", {
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery call cancellations and no-shows. 2026 is August 1 through November 16. 2025 is August 2 through November 18, aligned on the same weekday."
+        "aria-label": aria
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
@@ -451,13 +459,10 @@
         });
         return path;
       }
-      const lines = [
-        { key: "cancel2025", color: COLORS.y2025, width: 1.75 },
-        { key: "noshow2025", color: COLORS.direct2025, width: 1.75 },
-        { key: "cancel", color: COLORS.y2026, width: 2.25 },
-        { key: "noshow", color: COLORS.direct2026, width: 2.25 }
-      ];
-      lines.forEach((line) => {
+      [
+        { key: key2025, color: color2025, width: 1.75 },
+        { key: key2026, color: color2026, width: 2.25 }
+      ].forEach((line) => {
         svg.appendChild(svgEl("path", { d: seriesPath(line.key), fill: "none", stroke: line.color, "stroke-width": line.width }));
         outcomes.forEach((row, i) => {
           if (row[line.key] == null) return;
@@ -475,19 +480,17 @@
       const legend = document.createElement("div");
       legend.className = "legend";
       legend.innerHTML = [
-        `<span><i style="background:${COLORS.y2025}"></i>Cancellations 2025</span>`,
-        `<span><i style="background:${COLORS.y2026}"></i>Cancellations 2026</span>`,
-        `<span><i style="background:${COLORS.direct2025}"></i>No-shows 2025</span>`,
-        `<span><i style="background:${COLORS.direct2026}"></i>No-shows 2026</span>`
+        `<span><i style="background:${color2025}"></i>2025</span>`,
+        `<span><i style="background:${color2026}"></i>2026</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, outcomes.length, xAt, (index) => {
         const row = outcomes[index];
         const linesFor = [];
-        if (row.cancel != null) {
-          linesFor.push(`<div><strong>${weekday(2026, row.label)}, ${row.label} 2026</strong> Cancellations ${row.cancel.toLocaleString("en-US")} · No-shows ${row.noshow.toLocaleString("en-US")}</div>`);
+        if (row[key2026] != null) {
+          linesFor.push(`<div><strong>${weekday(2026, row.label)}, ${row.label} 2026</strong> ${row[key2026].toLocaleString("en-US")}</div>`);
         }
-        linesFor.push(`<div><strong>${weekday(2025, row.label2025)}, ${row.label2025} 2025</strong> Cancellations ${row.cancel2025.toLocaleString("en-US")} · No-shows ${row.noshow2025.toLocaleString("en-US")}</div>`);
+        linesFor.push(`<div><strong>${weekday(2025, row.label2025)}, ${row.label2025} 2025</strong> ${row[key2025].toLocaleString("en-US")}</div>`);
         return linesFor.join("");
       });
     }
@@ -572,7 +575,22 @@
       { key: "direct2026", name: "Direct 2026", color: COLORS.direct2026, width: 2.25 }
     ]);
     drawBookings();
-    drawOutcomes();
+    drawOutcome(
+      "cancellations-line",
+      "cancel",
+      "cancel2025",
+      "Discovery call cancellations. 2026 is August 1 through November 16. 2025 is August 2 through November 18, aligned on the same weekday.",
+      COLORS.y2026,
+      COLORS.y2025
+    );
+    drawOutcome(
+      "no-shows-line",
+      "noshow",
+      "noshow2025",
+      "Discovery call no-shows. 2026 is August 1 through November 16. 2025 is August 2 through November 18, aligned on the same weekday.",
+      COLORS.direct2026,
+      COLORS.direct2025
+    );
   </script>
 </body>
 </html>
