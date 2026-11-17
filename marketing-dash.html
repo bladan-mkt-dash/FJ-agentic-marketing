@@ -201,7 +201,7 @@
           <div class="stat"><strong>381</strong><span>2025 trend window, same days</span></div>
         </div>
         <div class="chart-wrap" id="bookings-line"></div>
-        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 16. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9. November 16 is a full day for both years.</p>
+        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 16, in that year’s line color. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9. November 16 is a full day for both years.</p>
 
 
         <h2 id="confirmed">Confirmed and showed</h2>
@@ -274,7 +274,7 @@
           <div class="stat"><strong>33</strong><span>2025 · Aug 16–Nov 18</span></div>
         </div>
         <div class="chart-wrap" id="cancellations-line"></div>
-        <p class="chart-note">Y-axis: cancellations. Each trend is a straight line fit across that year’s points. 2025 sits one day to the right so each point is the same weekday. The last point is November 18, 2025 only.</p>
+        <p class="chart-note">Y-axis: cancellations. Each trend is a straight line fit across that year’s points, in that year’s line color. 2025 sits one day to the right so each point is the same weekday. The last point is November 18, 2025 only.</p>
         <h2 id="no-shows">Discovery call no-shows</h2>
         <p>Same scheduled dates and weekday alignment. 2026 is the darker line.</p>
         <div class="stats pair">
@@ -282,7 +282,7 @@
           <div class="stat"><strong>24</strong><span>2025 · Aug 16–Nov 18</span></div>
         </div>
         <div class="chart-wrap" id="no-shows-line"></div>
-        <p class="chart-note">Y-axis: no-shows. Each trend is a straight line fit across that year’s points. Source: GoHighLevel discovery-call calendars. A cancellation or no-show is the current appointment status, counted on the scheduled date. Many 2025 statuses were updated months after the call.</p>
+        <p class="chart-note">Y-axis: no-shows. Each trend is a straight line fit across that year’s points, in that year’s line color. Source: GoHighLevel discovery-call calendars. A cancellation or no-show is the current appointment status, counted on the scheduled date. Many 2025 statuses were updated months after the call.</p>
         <footer>Five Journeys · Channel 5 Impact · Updated through November 16</footer>
       </section>
     </main>
@@ -300,9 +300,7 @@
       axis: "#6b7f78",
       grid: "#d7e2de",
       band: "#9ec3e6",
-      bonus: "#6fbf84",
-      trend: "#264540",
-      trend2025: "#c9844a"
+      bonus: "#6fbf84"
     };
     function svgEl(name, attrs) {
       const el = document.createElementNS("http://www.w3.org/2000/svg", name);
@@ -438,9 +436,7 @@
       });
     }
 
-    function drawOutcome(hostId, key2026, key2025, aria, color2026, color2025, matchTrends) {
-      const trend2026 = matchTrends ? color2026 : COLORS.trend;
-      const trend2025 = matchTrends ? color2025 : COLORS.trend2025;
+    function drawOutcome(hostId, key2026, key2025, aria, color2026, color2025) {
       const host = document.getElementById(hostId);
       const w = 780, h = 300, pad = { t: 16, r: 16, b: 36, l: 46 };
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
@@ -506,10 +502,10 @@
         });
       });
       svg.appendChild(svgEl("path", {
-        d: trendPath(key2025), fill: "none", stroke: trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath(key2025), fill: "none", stroke: color2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       svg.appendChild(svgEl("path", {
-        d: trendPath(key2026), fill: "none", stroke: trend2026, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath(key2026), fill: "none", stroke: color2026, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       outcomes.forEach((row, i) => {
         if (i % 14 !== 0 || !row.label) return;
@@ -524,8 +520,8 @@
       legend.innerHTML = [
         `<span><i style="background:${color2025}"></i>2025</span>`,
         `<span><i style="background:${color2026}"></i>2026</span>`,
-        `<span><i style="background:${trend2025}"></i>2025 trend</span>`,
-        `<span><i style="background:${trend2026}"></i>2026 trend</span>`
+        `<span><i style="background:${color2025}"></i>2025 trend</span>`,
+        `<span><i style="background:${color2026}"></i>2026 trend</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, outcomes.length, xAt, (index) => {
@@ -655,10 +651,10 @@
       svg.appendChild(svgEl("path", { d: seriesPath("count2025"), fill: "none", stroke: COLORS.direct2025, "stroke-width": 1.75 }));
       svg.appendChild(svgEl("path", { d: seriesPath("count"), fill: "none", stroke: COLORS.direct2026, "stroke-width": 2.25 }));
       svg.appendChild(svgEl("path", {
-        d: trendPath("count2025"), fill: "none", stroke: COLORS.trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath("count2025"), fill: "none", stroke: COLORS.direct2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       svg.appendChild(svgEl("path", {
-        d: trendPath("count"), fill: "none", stroke: COLORS.trend, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+        d: trendPath("count"), fill: "none", stroke: COLORS.direct2026, "stroke-width": 1.75, "stroke-dasharray": "5 4"
       }));
       bookings.forEach((row, i) => {
         if (i % 14 !== 0) return;
@@ -673,8 +669,8 @@
       legend.innerHTML = [
         `<span><i style="background:${COLORS.direct2025}"></i>2025</span>`,
         `<span><i style="background:${COLORS.direct2026}"></i>2026</span>`,
-        `<span><i style="background:${COLORS.trend2025}"></i>2025 trend</span>`,
-        `<span><i style="background:${COLORS.trend}"></i>2026 trend</span>`,
+        `<span><i style="background:${COLORS.direct2025}"></i>2025 trend</span>`,
+        `<span><i style="background:${COLORS.direct2026}"></i>2026 trend</span>`,
         `<span><i style="background:${COLORS.band}"></i>Channel 5 run times</span>`,
         `<span><i style="background:${COLORS.bonus}"></i>Channel 5 bonus spots</span>`
       ].join("");
@@ -700,8 +696,7 @@
       "cancel2025",
       "Discovery call cancellations from August 15, with a straight trend for 2026 and a straight trend for 2025.",
       COLORS.y2026,
-      COLORS.y2025,
-      true
+      COLORS.y2025
     );
     drawOutcome(
       "no-shows-line",
