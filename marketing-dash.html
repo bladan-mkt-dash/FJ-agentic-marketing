@@ -256,7 +256,7 @@
           <div class="stat"><strong>33</strong><span>2025 · Aug 16–Nov 18</span></div>
         </div>
         <div class="chart-wrap" id="cancellations-line"></div>
-        <p class="chart-note">Y-axis: cancellations. 2025 sits one day to the right so each point is the same weekday. The last point is November 18, 2025 only.</p>
+        <p class="chart-note">Y-axis: cancellations. Each trend is a straight line fit across that year’s points. 2025 sits one day to the right so each point is the same weekday. The last point is November 18, 2025 only.</p>
         <h2 id="no-shows">Discovery call no-shows</h2>
         <p>Same scheduled dates and weekday alignment. 2026 is the darker line.</p>
         <div class="stats pair">
@@ -264,7 +264,7 @@
           <div class="stat"><strong>24</strong><span>2025 · Aug 16–Nov 18</span></div>
         </div>
         <div class="chart-wrap" id="no-shows-line"></div>
-        <p class="chart-note">Y-axis: no-shows. Source: GoHighLevel discovery-call calendars. A cancellation or no-show is the current appointment status, counted on the scheduled date. Many 2025 statuses were updated months after the call.</p>
+        <p class="chart-note">Y-axis: no-shows. Each trend is a straight line fit across that year’s points. Source: GoHighLevel discovery-call calendars. A cancellation or no-show is the current appointment status, counted on the scheduled date. Many 2025 statuses were updated months after the call.</p>
         <footer>Five Journeys · Channel 5 Impact · Updated through November 16</footer>
       </section>
     </main>
@@ -459,6 +459,24 @@
         });
         return path;
       }
+      function trendPath(key) {
+        const indexes = [];
+        outcomes.forEach((row, i) => {
+          if (row[key] != null) indexes.push(i);
+        });
+        const from = indexes[0];
+        const to = indexes[indexes.length - 1];
+        let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+        indexes.forEach((i) => {
+          const x = i - from;
+          const y = outcomes[i][key];
+          sumX += x; sumY += y; sumXY += x * y; sumXX += x * x;
+        });
+        const n = indexes.length;
+        const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+        const intercept = (sumY - slope * sumX) / n;
+        return `M${xAt(from)},${yAt(intercept)} L${xAt(to)},${yAt(intercept + slope * (to - from))}`;
+      }
       [
         { key: key2025, color: color2025, width: 1.75 },
         { key: key2026, color: color2026, width: 2.25 }
@@ -469,6 +487,12 @@
           svg.appendChild(svgEl("circle", { cx: xAt(i), cy: yAt(row[line.key]), r: 2, fill: line.color }));
         });
       });
+      svg.appendChild(svgEl("path", {
+        d: trendPath(key2025), fill: "none", stroke: COLORS.trend2025, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+      }));
+      svg.appendChild(svgEl("path", {
+        d: trendPath(key2026), fill: "none", stroke: COLORS.trend, "stroke-width": 1.75, "stroke-dasharray": "5 4"
+      }));
       outcomes.forEach((row, i) => {
         if (i % 14 !== 0 || !row.label) return;
         const tick = svgEl("text", { x: xAt(i), y: h - 10, "text-anchor": "middle", fill: COLORS.axis, "font-size": 10 });
@@ -481,7 +505,9 @@
       legend.className = "legend";
       legend.innerHTML = [
         `<span><i style="background:${color2025}"></i>2025</span>`,
-        `<span><i style="background:${color2026}"></i>2026</span>`
+        `<span><i style="background:${color2026}"></i>2026</span>`,
+        `<span><i style="background:${COLORS.trend2025}"></i>2025 trend</span>`,
+        `<span><i style="background:${COLORS.trend}"></i>2026 trend</span>`
       ].join("");
       host.appendChild(legend);
       attachHover(host, svg, outcomes.length, xAt, (index) => {
@@ -579,7 +605,7 @@
       "cancellations-line",
       "cancel",
       "cancel2025",
-      "Discovery call cancellations. 2026 is August 15 through November 16. 2025 is August 16 through November 18, aligned on the same weekday.",
+      "Discovery call cancellations from August 15, with a straight trend for 2026 and a straight trend for 2025.",
       COLORS.y2026,
       COLORS.y2025
     );
@@ -587,7 +613,7 @@
       "no-shows-line",
       "noshow",
       "noshow2025",
-      "Discovery call no-shows. 2026 is August 15 through November 16. 2025 is August 16 through November 18, aligned on the same weekday.",
+      "Discovery call no-shows from August 15, with a straight trend for 2026 and a straight trend for 2025.",
       COLORS.direct2026,
       COLORS.direct2025
     );
