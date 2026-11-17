@@ -3,71 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Five Journeys — AdRoll HTML5 banners</title>
+  <title>Five Journeys — AdRoll campaign</title>
   <style>
-    :root {
-      --ink: #1a2e2a;
-      --ink-muted: #3d524c;
-      --accent: #264540;
-      --surface: #f7f9f8;
-      --wire: #b8c9c3;
-    }
-    body {
-      margin: 0;
-      color: var(--ink);
-      font-family: "Segoe UI", system-ui, sans-serif;
-      line-height: 1.55;
-    }
-    .wrap { margin: 0 auto; max-width: 52rem; padding: 2rem 1.25rem 4rem; }
-    .back { color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.875rem; }
-    .back:hover { text-decoration: underline; }
-    h1 { font-size: 1.6rem; letter-spacing: -0.02em; margin: 1rem 0 0.4rem; }
-    p, li { color: var(--ink-muted); }
-    .frame {
-      background: var(--surface);
-      border: 1px dashed var(--wire);
-      display: inline-block;
-      margin: 0.5rem 0 1.5rem;
-      padding: 12px;
-    }
-    iframe { display: block; border: 0; }
-    code { font-size: 0.85em; }
+    body { margin: 0; background: #e7eeeb; color: #1a2e2a; font-family: "Segoe UI", Arial, sans-serif; }
+    .wrap { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    h1 { font-size: 1.5rem; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.15rem; margin: 1.8rem 0 0.3rem; }
+    h3 { font-size: 1rem; margin: 1.1rem 0 0.2rem; }
+    p { color: #3d524c; line-height: 1.5; }
+    a { color: #264540; font-weight: 650; }
+    code { font-size: 0.9em; }
+    .card { background: #fff; border: 1px solid #d5e2dc; border-radius: 8px; margin: 0.7rem 0; padding: 0.85rem 1rem; }
+    .card p { margin: 0.35rem 0; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <a class="back" href="../index.html">FJ Agentic Marketing Home</a>
     <h1>AdRoll HTML5 banners</h1>
-    <p>
-      Self-contained creatives for AdRoll upload. The original Five Journeys
-      wordmark is packaged as <code>logo.png</code> inside each ZIP — do not
-      hotlink it from fivejourneys.com. Animation plays once in about
-      1 second and holds. Default click-through is
-      <code>https://www.fivejourneys.com</code> — AdRoll will override that
-      with the campaign landing page via <code>clickTag</code>.
-    </p>
+    <p>Four variations, two audiences. Each variation has six sizes. Open a variation to play the ads and download the upload zips.</p>
 
-    <h2>300 × 250</h2>
-    <div class="frame">
-      <iframe src="300x250/index.html" width="300" height="250" title="300x250 banner"></iframe>
+    <h2>Segment 1 — High-intent visitors</h2>
+    <p>Membership page visitors. The goal is to get past hesitation about cost, commitment, and care levels, and book a discovery call. Landing page: the Five Journeys membership page.</p>
+
+    <div class="card">
+      <h3><a href="segment-1-high-intent/variation-1a-social-proof-and-insurance/preview.html">Variation 1A — Social proof and insurance</a></h3>
+      <p>0–4s seated photo of Dr. Wendie and Dr. Ed. 4–8s reviews and appointments. 8–12s insurance line and a Schedule Your Call button.</p>
+    </div>
+    <div class="card">
+      <h3><a href="segment-1-high-intent/variation-1b-tiered-care/preview.html">Variation 1B — Tiered care and personalized access</a></h3>
+      <p>0–4s a provider with a patient. 4–8s four membership tiers. 8–12s a Compare Memberships or Schedule Your Call button.</p>
     </div>
 
-    <h2>728 × 90</h2>
-    <div class="frame">
-      <iframe src="728x90/index.html" width="728" height="90" title="728x90 banner"></iframe>
+    <h2>Segment 2 — Mid-intent visitors</h2>
+    <p>People who viewed two or more pages. The goal is to answer root-cause frustration and offer a low-friction next step. Landing page: the homepage, the health quiz, or the discovery-call page.</p>
+
+    <div class="card">
+      <h3><a href="segment-2-mid-intent/variation-2a-normal-labs/preview.html">Variation 2A — Normal labs and root-cause relief</a></h3>
+      <p>0–4s a lifestyle photo and the “labs are normal” line. 4–8s comprehensive testing. 8–12s a Schedule Your Call button.</p>
+    </div>
+    <div class="card">
+      <h3><a href="segment-2-mid-intent/variation-2b-health-quiz/preview.html">Variation 2B — Health quiz</a></h3>
+      <p>0–4s Dr. Wendie and Dr. Ed. 4–8s hidden triggers. 8–12s a Take the Health Quiz button.</p>
     </div>
 
-    <h2>Upload to AdRoll</h2>
-    <ul>
-      <li>Each size is its own ZIP, with <code>index.html</code> and <code>logo.png</code> at the root.</li>
-      <li>ZIP must stay under 150 KB. These stay well under that with the local logo file.</li>
-      <li>In AdRoll, set the landing URL on the ad — do not edit the file unless you want a local fallback.</li>
-      <li>Send AdRoll support these ZIPs. Relative images in the package are served with the ad; a live site URL is not required and often gets blocked.</li>
-    </ul>
-    <p>
-      Zips: <a href="five-journeys-adroll-300x250.zip">300×250</a> ·
-      <a href="five-journeys-adroll-728x90.zip">728×90</a>
-    </p>
+    <h2>Earlier wordmark ads</h2>
+    <p>The October 300×250 and 728×90 packages are in <a href="original-wordmark/preview.html">original wordmark</a>. They are not part of this four-variation campaign. Shared photos stay in <code>source</code>.</p>
   </div>
 </body>
 </html>
