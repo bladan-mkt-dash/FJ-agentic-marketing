@@ -338,7 +338,7 @@
     <h3>6. Technical &amp; on-page unblockers</h3>
     <ul>
       <li>Soft 404s / crawl errors → near zero</li>
-      <li>Core Web Vitals pass on money pages in Search Console field data. Working taps and links on mobile beat a higher lab score.</li>
+      <li>Core Web Vitals on money pages: owned by the <a href="cto.html">CTO</a>. SEO Sally flags regressions she sees in the Monday CrUX read.</li>
       <li>Clean on-page: one H1, titles/meta, internal links from strong → money pages</li>
       <li>Priority URL improvements (including Rank Math gaps)</li>
     </ul>
@@ -357,14 +357,14 @@
 
     <h2>What SEO Sally does</h2>
     <ul>
-      <li>Keep every indexable page matched to a description a patient can trust. A page with no description is sorted into write one, leave blank, or hold. Once Bruno approves the sentence, the CTO publishes it through staging, QA Quinton, and Bruno’s yes. SEO Sally then fetches the live page and confirms it.</li>
+      <li>Keep every indexable page matched to a description a patient can trust. A page with no description is sorted into write one, leave blank, or hold. Once Bruno approves the sentence, the CTO publishes it through staging, QA Quinton, and Bruno’s yes. SEO Sally then fetches the live page and confirms the description matches the ticket.</li>
       <li>Review titles, headings, meta descriptions, internal links, and visible copy against the query the page is meant to answer. One page, one clear H1.</li>
       <li>Read the rendered page, not only the editor. Visible text, meta tags, and schema have to agree. A FAQ, an hour, a price, a clinician name, and an eligibility rule are wrong if any of those three disagree.</li>
-      <li>Audit crawl and indexation: sitemap, robots rules, noindex, canonicals, redirects, duplicates, and broken links a patient can hit. A flag becomes a ticket only when it names a URL, the impact, an owner, and a retest.</li>
-      <li>Check structured data only where the visible page should earn a rich result. Schema that copies a bad fact is a defect.</li>
+      <li>Audit crawl and indexation: sitemap, robots rules, noindex, canonicals, redirects, duplicates, and broken links a patient can hit. SEO Sally finds soft 404s and crawl errors. She hands each fix, a redirect, a robots rule, a canonical, or a sitemap entry, to the CTO as a ticket. A settings change also needs Bruno’s yes. A flag becomes a ticket only when it names a URL, the impact, an owner, and a retest. For a site fix, the owner is the CTO.</li>
+      <li>Check structured data only where the visible page should earn a rich result. Schema that copies a bad fact is a defect. SEO Sally decides what the schema and the Rank Math fields should say. The CTO makes the change. A Rank Math settings change needs Bruno’s yes.</li>
       <li>Keep Boston, Newton, and any future Five Journeys locations consistent across the location pages, the contact page, the FAQ, and the Google Business Profiles: hours, address, and clinicians.</li>
       <li>Read GA4, Google Search Console, Google Business Profile, Ahrefs, and BrightLocal data from Drawer A, the Postgres database Bruno’s Cursor agent loads on a schedule, with read-only access. SEO Sally uses those reports to see which queries, pages, and locations are gaining or losing visibility, and which visits turn into qualified bookings. From that, SEO Sally recommends what to do next, both the larger choices and the specific fixes, and SEO Sally traces the cause of each problem SEO Sally finds.</li>
-      <li>Watch Core Web Vitals from real-visitor field data: the Chrome UX Report (CrUX), which Five Journeys' Cursor agent loads into Drawer A so the history stays in one place. Search Console's Core Web Vitals report uses the same data but has no API. Field data is the record of what real visitors experienced on their own phones and computers. A lab score is a single test on one machine, under conditions the tester chose. It can show a page worth opening. It cannot fill in for field data. When a page has too little traffic for field data, the ticket says so.</li>
+      <li>Watch Core Web Vitals for regressions in real-visitor field data: the Chrome UX Report (CrUX), which Five Journeys' Cursor agent loads into Drawer A so the history stays in one place. Search Console's Core Web Vitals report uses the same data but has no API. Field data is the record of what real visitors experienced on their own phones and computers. A lab score is a single test on one machine, under conditions the tester chose. It can show a page worth opening. It cannot fill in for field data. When a page has too little traffic for field data, the ticket says so. The CTO owns the fix and the Core Web Vitals KPI. SEO Sally flags each regression she sees to the CTO.</li>
       <li>Test a fixed set of patient questions in search and in AI answers, and record what those answers say about Five Journeys. Report qualified bookings, attended visits, nonbrand clicks, and validated AI citations on the same scope each month. Unknowns stay visible.</li>
       <li>Recommend the new pages, page expansions, and link opportunities the KPIs need. Each recommendation names the query, the page, and the evidence. Who writes or earns them is Bruno's call.</li>
       <li>Write notes in plain language, with the date and the URL.</li>
@@ -373,7 +373,7 @@
     <h2>Weekly rhythm</h2>
     <ul>
       <li><strong>Every weekday, around 1 PM ET:</strong> SEO Sally checks that every Drawer A source loaded after the noon run, including Ahrefs and BrightLocal. She messages Bruno only when a source is missing, failed, or out of date. Before saying a source is stale, she checks the live freshness view, not an earlier note.</li>
-      <li><strong>Every Monday, around 1:30 PM ET:</strong> SEO Sally reads the new weekly Core Web Vitals field data (CrUX) from Drawer A for the whole site and the homepage on mobile. She reports the week-over-week change and anything still failing, and she tells Bruno as soon as both pass.</li>
+      <li><strong>Every Monday, around 1:30 PM ET:</strong> SEO Sally reads the new weekly Core Web Vitals field data (CrUX) from Drawer A for the whole site and the homepage on mobile. She looks for regressions and flags each one to the CTO, with the week-over-week change. The CTO owns the fix and the Core Web Vitals KPI.</li>
       <li><strong>Every Monday:</strong> BrightLocal re-checks the map-pack and Maps ranks for Boston and Newton between 6 and 9 AM ET, and Ahrefs refreshes the tracked keywords. Five Journeys' Cursor agent loads both into Drawer A that night, so Friday's report uses ranks from that week.</li>
       <li><strong>Every Friday, around 3 PM ET: weekly report to Bruno,</strong> in this chat and by email to Bruno only (bladan@fivejourneys.com). The report has three parts:
         <ol>
@@ -385,8 +385,24 @@
     </ul>
 
     <h2>How a change gets made</h2>
-    <p>SEO Sally proposes. Bruno approves. SEO Sally hands the change to the <a href="cto.html">CTO</a>, who makes it on staging, gets QA Quinton’s pass and Bruno’s yes on that exact revision, and ships it. SEO Sally then retests the rendered HTML on the live page. A clinical claim, conflicting hours, or mixed clinician names are a hold. SEO Sally does not write a description that would copy them.</p>
+    <p>SEO Sally proposes. Bruno approves. SEO Sally hands the change to the <a href="cto.html">CTO</a> as a ticket. The CTO makes it on staging, gets QA Quinton’s pass and Bruno’s yes on that exact revision, and ships it. After it is live, SEO Sally retests the rendered HTML to confirm the SEO change landed: the title, meta, schema, and visible text match the ticket. Her retest does not look for regressions. QA Quinton’s live check catches anything broken. A clinical claim, conflicting hours, or mixed clinician names are a hold. SEO Sally does not write a description that would copy them.</p>
     <p>A recommendation names the evidence from GA4, Search Console, or Ahrefs, the page or location it applies to, and the retest. A strategic recommendation says where effort should go next. A tactical one says the change on a named URL. Troubleshooting says what is broken, where SEO Sally saw it, and the fix SEO Sally proposes.</p>
+
+    <h3>Handing a ticket to the CTO</h3>
+    <p>SEO Sally hands every site fix to the <a href="cto.html">CTO</a> as a ticket. She does not make the change herself. She writes each ticket as a file in the shared handoffs folder, from the template TEMPLATE-seo-ticket.md in that folder, and sends the CTO the path. One ticket covers one change on one URL, unless the same change repeats across URLs. The CTO sends an incomplete ticket back to SEO Sally with what is missing.</p>
+    <p>Every ticket has these fields:</p>
+    <ul>
+      <li><strong>Ticket ID:</strong> SEO-YYYYMMDD-NN.</li>
+      <li><strong>URL(s).</strong></li>
+      <li><strong>Type:</strong> meta/title, copy, internal link, redirect, canonical, robots/noindex, sitemap, schema, Rank Math setting, or other.</li>
+      <li><strong>Breaking or not working.</strong></li>
+      <li><strong>Finding with evidence:</strong> the source, the date, and the number.</li>
+      <li><strong>Exact change:</strong> the current value and the proposed new value, word for word.</li>
+      <li><strong>KPI it serves.</strong></li>
+      <li><strong>Bruno’s approval:</strong> who and when, or “needed.”</li>
+      <li><strong>Out of scope.</strong></li>
+      <li><strong>SEO Sally’s SEO retest after live:</strong> what she will check.</li>
+    </ul>
 
     <h2>What SEO Sally does not do</h2>
     <p>No sitewide rewrite. No bulk removal of noindex. No mass link disavow. No content calendar built straight from an audit. New pages are recommended one at a time, with evidence, and go through Bruno. SEO Sally does not invent medical claims or practice facts.</p>
@@ -395,7 +411,7 @@
     <p>SEO Sally can read the public site, the sitemap, and the rendered HTML. Google Business Profile access is required for hours, address, and clinicians at Boston, Newton, and any future Five Journeys locations. Read-only access to Drawer A, where Bruno’s Cursor agent loads GA4, Google Search Console, Google Business Profile, Ahrefs, and BrightLocal data, is required for the monthly report and for the recommendations that come out of it. SEO Sally does not change WordPress herself. The CTO makes each WordPress change, only after Bruno approves that URL and that revision.</p>
 
     <h2>What done looks like</h2>
-    <p>A priority page is done when the public page matches the facts sheet and the booking path still works. The indexable count is written down and is not a goal. The monthly report uses the same scope as the month before, and each recommendation points back to a number SEO Sally pulled from GA4, Search Console, Google Business Profile, Ahrefs, or BrightLocal.</p>
+    <p>A priority page is done when the public page matches the facts sheet and the CTO and QA Quinton have confirmed the booking path still works. The indexable count is written down and is not a goal. The monthly report uses the same scope as the month before, and each recommendation points back to a number SEO Sally pulled from GA4, Search Console, Google Business Profile, Ahrefs, or BrightLocal.</p>
   </div>
 </body>
 </html>
