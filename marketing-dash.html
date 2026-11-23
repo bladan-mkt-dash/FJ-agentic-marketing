@@ -164,11 +164,11 @@
         <h2 id="overall">Overall sessions</h2>
         <p>Every session. 2026 is the solid line. 2025 is the lighter line.</p>
         <div class="chart-wrap" id="overall-line"></div>
-        <p class="chart-note">Y-axis: sessions. The dashed line is the Channel 5 start. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.</p>
+        <p class="chart-note">Y-axis: sessions. The dashed line is the Channel 5 start. Blue bands are Channel 5 run times, including November 8–10 and November 15–17. The green band is Channel 5 bonus spots, October 2–9.</p>
         <h2 id="direct">Direct sessions</h2>
         <p>Direct visits, same calendar days.</p>
         <div class="chart-wrap" id="direct-line"></div>
-        <p class="chart-note">Y-axis: sessions. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.</p>
+        <p class="chart-note">Y-axis: sessions. Blue bands are Channel 5 run times, including November 8–10 and November 15–17. The green band is Channel 5 bonus spots, October 2–9.</p>
         <h2 id="daily">Daily detail</h2>
         <div class="table-scroll">
           <table>
@@ -192,7 +192,7 @@
           Each point is the Eastern Time date the discovery call was booked, from Sunday August 2
           through Sunday November 22. 2026 is the darker line. 2025 is the
           lighter line, on the same calendar day. Each year has its own trend, fit from
-          September 13 through November 22. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.
+          September 13 through November 22. Blue bands are Channel 5 run times, including November 8–10 and November 15–17. The green band is Channel 5 bonus spots, October 2–9.
         </p>
         <div class="stats">
           <div class="stat"><strong>821</strong><span>2026 · Aug 2–Nov 22 · +30.5% vs 2025</span></div>
@@ -201,7 +201,7 @@
           <div class="stat"><strong>410</strong><span>2025 trend window, same days</span></div>
         </div>
         <div class="chart-wrap" id="bookings-line"></div>
-        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 22, in that year’s line color. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9. November 22 is a full day for both years.</p>
+        <p class="chart-note">Y-axis: calls booked. Each trend is a straight line fit to September 13–November 22, in that year’s line color. Blue bands are Channel 5 run times, including November 8–10 and November 15–17. The green band is Channel 5 bonus spots, October 2–9. November 22 is a full day for both years.</p>
 
 
         <h2 id="confirmed">Confirmed and showed</h2>
@@ -209,7 +209,7 @@
           The same booking dates as the chart above, limited to appointments whose current
           status is Confirmed or Showed. 2026 is the darker line. 2025 is the lighter line,
           on the same calendar day. Each year has its own trend, fit from September 13 through
-          November 22. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9.
+          November 22. Blue bands are Channel 5 run times, including November 8–10 and November 15–17. The green band is Channel 5 bonus spots, October 2–9.
         </p>
         <div class="stats">
           <div class="stat"><strong>583</strong><span>2026 · Aug 2–Nov 22 · +4.5% vs 2025</span></div>
@@ -218,7 +218,7 @@
           <div class="stat"><strong>358</strong><span>2025 trend window, same days</span></div>
         </div>
         <div class="chart-wrap" id="confirmed-line"></div>
-        <p class="chart-note">Y-axis: calls booked that are still Confirmed or Showed. Each trend is a straight line fit to September 13–November 22, in that year’s line color. Blue bands are Channel 5 run times, including November 8–10. The green band is Channel 5 bonus spots, October 2–9. Showed is rarely marked, so most of these are still Confirmed.</p>
+        <p class="chart-note">Y-axis: calls booked that are still Confirmed or Showed. Each trend is a straight line fit to September 13–November 22, in that year’s line color. Blue bands are Channel 5 run times, including November 8–10 and November 15–17. The green band is Channel 5 bonus spots, October 2–9. Showed is rarely marked, so most of these are still Confirmed.</p>
 
         <h2 id="october">October, 2023–2026</h2>
         <p>Full month of October, counted on the date the call was booked.</p>
@@ -309,7 +309,7 @@
     const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
     const launchIndex = days.findIndex((d) => d.label === "Sep 13");
-    const CHANNEL_BANDS = [["Sep 13", "Sep 15"], ["Sep 20", "Sep 22"], ["Oct 11", "Oct 13"], ["Oct 18", "Oct 20"], ["Nov 8", "Nov 10"]];
+    const CHANNEL_BANDS = [["Sep 13", "Sep 15"], ["Sep 20", "Sep 22"], ["Oct 11", "Oct 13"], ["Oct 18", "Oct 20"], ["Nov 8", "Nov 10"], ["Nov 15", "Nov 17"]];
     const BONUS_BANDS = [["Oct 2", "Oct 9"]];
     function shadeBands(svg, rows, xAt, pad, plotWidth, plotHeight, bands, fill) {
       bands.forEach(([start, end]) => {
@@ -385,7 +385,7 @@
       const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
       const peak = Math.max(...days.flatMap((d) => series.map((s) => d[s.key])));
       const yMax = Math.ceil(peak / 100) * 100;
-      const svg = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", "aria-label": hostId === "overall-line" ? "Overall sessions, September 1 through November 22, 2025 and 2026, with Channel 5 run times shaded, including November 8 through 10, and Channel 5 bonus spots shaded October 2 through 9" : "Direct sessions, September 1 through November 22, 2025 and 2026, with Channel 5 run times shaded, including November 8 through 10, and Channel 5 bonus spots shaded October 2 through 9" });
+      const svg = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: "100%", role: "img", "aria-label": hostId === "overall-line" ? "Overall sessions, September 1 through November 22, 2025 and 2026, with Channel 5 run times shaded, including November 8 through 10 and November 15 through 17, and Channel 5 bonus spots shaded October 2 through 9" : "Direct sessions, September 1 through November 22, 2025 and 2026, with Channel 5 run times shaded, including November 8 through 10 and November 15 through 17, and Channel 5 bonus spots shaded October 2 through 9" });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
         const val = Math.round(yMax - (yMax * i) / 4);
@@ -544,7 +544,7 @@
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery calls booked that are still Confirmed or Showed, August 2 through November 22. 2026 is the darker line and 2025 is the lighter line. Each trend matches that year's line color and runs from September 13 through November 22. Channel 5 run times, including November 8 through 10, and bonus spots are shaded."
+        "aria-label": "Discovery calls booked that are still Confirmed or Showed, August 2 through November 22. 2026 is the darker line and 2025 is the lighter line. Each trend matches that year's line color and runs from September 13 through November 22. Channel 5 run times, including November 8 through 10 and November 15 through 17, and bonus spots are shaded."
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
@@ -617,7 +617,7 @@
         viewBox: `0 0 ${w} ${h}`,
         width: "100%",
         role: "img",
-        "aria-label": "Discovery calls booked each day from August 2 through November 22, 2026 as the darker line and 2025 as the lighter line, each with its own trend from September 13 through November 22, Channel 5 run times shaded, including November 8 through 10, and Channel 5 bonus spots shaded October 2 through 9"
+        "aria-label": "Discovery calls booked each day from August 2 through November 22, 2026 as the darker line and 2025 as the lighter line, each with its own trend from September 13 through November 22, Channel 5 run times shaded, including November 8 through 10 and November 15 through 17, and Channel 5 bonus spots shaded October 2 through 9"
       });
       for (let i = 0; i <= 4; i++) {
         const y = pad.t + (ih * i) / 4;
