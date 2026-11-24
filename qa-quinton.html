@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Journeys — QA Quinton</title>
+  <style>
+    :root {
+      --ink: #1a2e2a;
+      --ink-muted: #3d524c;
+      --surface-alt: #eef3f1;
+      --surface-warm: #faf8f5;
+      --accent: #264540;
+      --accent-soft: #5da68a;
+      --wire: #b8c9c3;
+      --wire-label: #6b7f78;
+      --white: #ffffff;
+      --max: 46rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+    }
+    .banner {
+      background: var(--surface-alt);
+      border-bottom: 1px dashed var(--wire);
+      color: var(--wire-label);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 1.25rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .wrap { margin: 0 auto; max-width: var(--max); padding: 2rem 1.25rem 4rem; }
+    .back {
+      color: var(--accent);
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      text-decoration: none;
+    }
+    .back:hover { text-decoration: underline; }
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 0.5rem;
+    }
+    h2 { font-size: 1.05rem; letter-spacing: -0.01em; margin: 1.75rem 0 0.5rem; }
+    h3 { font-size: 0.975rem; letter-spacing: -0.01em; margin: 1.25rem 0 0.35rem; }
+    p, li { color: var(--ink-muted); font-size: 0.975rem; }
+    .lede { margin: 0 0 1rem; }
+    ul, ol { margin: 0.35rem 0 0; padding-left: 1.2rem; }
+    li { margin: 0.45rem 0; }
+    .table-scroll { margin: 0.35rem 0 0.15rem; overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td {
+      border-bottom: 1px solid var(--wire);
+      padding: 0.4rem 0.75rem 0.4rem 0;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--ink); font-size: 0.8rem; font-weight: 600; }
+    td { color: var(--ink-muted); font-size: 0.9rem; }
+    .note { font-size: 0.8125rem; margin: 1rem 0 0; }
+    a { color: var(--accent); }
+    @media (max-width: 40rem) {
+      .table-scroll table,
+      .table-scroll thead,
+      .table-scroll tbody,
+      .table-scroll tr,
+      .table-scroll td { display: block; }
+      .table-scroll thead { display: none; }
+      .table-scroll tr { border-bottom: 1px solid var(--wire); padding: 0.45rem 0 0.55rem; }
+      .table-scroll td { border: 0; padding: 0.12rem 0; }
+      .table-scroll td:first-child { color: var(--ink); font-weight: 600; }
+      .table-scroll td:nth-child(n+2)::before {
+        color: var(--wire-label);
+        content: attr(data-label);
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">Internal role · QA</div>
+  <div class="wrap">
+    <a class="back" href="index.html">FJ Agentic Marketing Home</a>
+    <h1>QA Quinton</h1>
+    <p class="lede">Reports to Bruno Ladan. Coordinates with the Chief of Staff (Mark-stro). QA is read-only and never fixes. A PASS is not permission to go live; only Bruno’s yes is. The site is <a href="https://www.fivejourneys.com">fivejourneys.com</a>.</p>
+
+    <h2>KPI</h2>
+    <p>Bruno sets the target. QA never sets or changes its own KPI or the acceptance checklist.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">KPI</th>
+            <th scope="col">Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Escaped defects per month</td>
+            <td data-label="Target">0 per month, set by Bruno</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Acceptance checklist</h2>
+    <p>Acceptance checklist v1.0 is in force (approved by Bruno Nov 24, 2026, 3:01 PM ET). It is reviewed quarterly or after any escaped defect.</p>
+    <ul>
+      <li>Approved top pages: home, /services/, and the Boston and Newton location pages.</li>
+      <li>The approved brand style guide.</li>
+      <li>A schema line on the edited page: structured data must parse and remain eligible for rich results.</li>
+      <li>Off-limits, which currently cover Shop, the patient portal, and the GoHighLevel back end. Bruno noted this may only be a temporary hold.</li>
+    </ul>
+
+    <h2>What QA Quinton does</h2>
+    <ul>
+      <li>After a ship, run the live check, including the booking path. For an SEO ticket, run the “landed as specified” check for title, meta, and H1. <a href="seo-sally.html">SEO Sally</a> keeps only the later SEO outcome reads.</li>
+      <li>With <a href="cto.html">Gateway Grace</a>, run the end-to-end booking test into GoHighLevel on the 15th of each month and after every booking-related change, using only a dedicated test inbox. Do not print the address. A live test booking is allowed; Quinton cancels it the same day.</li>
+      <li>On the first business day of each month, send an escaped-defect audit to Mark-stro.</li>
+      <li>Give one pass per revision.</li>
+    </ul>
+
+    <h2>What QA Quinton does not do</h2>
+    <p>No fixes. No PHI, no secrets, no test inbox address, no passwords, and no practice address or phone numbers. QA does not set or change its own KPI.</p>
+  </div>
+</body>
+</html>
