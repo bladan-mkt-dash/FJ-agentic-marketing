@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Maintenance: when a bot goes live with a job description, move it from "class ... planned" to "class ... live" in BOTH charts, remove its "planned" label, and link its page. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -70,8 +71,113 @@
       overflow-x: auto;
       padding: 0.85rem 0.75rem;
     }
+    .chart-expandable {
+      margin: 0.75rem 0 0.35rem;
+    }
+    .chart-expandable .chart {
+      cursor: zoom-in;
+      margin: 0;
+    }
+    .chart-expandable .chart:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .chart-expand-btn {
+      background: transparent;
+      border: 1px solid var(--wire);
+      border-radius: 0.25rem;
+      color: var(--accent);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      padding: 0.35rem 0.65rem;
+    }
+    .chart-expand-btn:hover { border-color: var(--accent); }
+    .chart-expand-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .chart-lightbox {
+      align-items: stretch;
+      background: rgba(26, 46, 42, 0.72);
+      border: 0;
+      display: none;
+      inset: 0;
+      justify-content: center;
+      margin: 0;
+      max-height: none;
+      max-width: none;
+      padding: clamp(0.75rem, 3vw, 1.75rem);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+    .chart-lightbox.is-open {
+      display: flex;
+    }
+    .chart-lightbox__panel {
+      background: var(--surface-warm);
+      border: 1px solid var(--wire);
+      box-shadow: 0 0.5rem 2rem rgba(26, 46, 42, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      min-height: 0;
+      position: relative;
+      width: 100%;
+    }
+    .chart-lightbox__close {
+      align-self: flex-end;
+      background: var(--white);
+      border: 1px solid var(--wire);
+      border-radius: 0.25rem;
+      color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin: 0.65rem 0.65rem 0;
+      padding: 0.4rem 0.7rem;
+      z-index: 1;
+    }
+    .chart-lightbox__close:hover { border-color: var(--accent); }
+    .chart-lightbox__close:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .chart-lightbox__stage {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 0.5rem 0.75rem 0.85rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chart-lightbox__stage .chart {
+      border: 0;
+      margin: 0;
+      min-width: min-content;
+      overflow: visible;
+      padding: 0.5rem;
+    }
+    .chart-lightbox__stage .mermaid,
+    .chart-lightbox__stage svg {
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      max-width: none;
+    }
+    body.chart-lightbox-open { overflow: hidden; }
     .legend li { margin: 0.25rem 0; }
     noscript p { font-size: 0.875rem; margin: 0.5rem 0 0; }
+  .sw{display:inline-block;width:18px;height:12px;border-radius:3px;vertical-align:middle;margin-right:4px}
+    .sw-live{background:#cfe6df;border:3px solid #1f4a42}
+    .sw-planned{background:#fff;border:1.5px dashed #9aa5a2}
+    .sw-person{background:#f6ead8;border:1.5px solid #8a6a3f}
   </style>
 </head>
 <body>
@@ -88,19 +194,25 @@
     <noscript><p>The drawing below needs JavaScript. The text version under it is complete.</p></noscript>
     <div class="chart">
       <pre class="mermaid">
-flowchart TB
-  Bruno["Bruno (CMO, Five Journeys)"]
-  Mark["Mark-stro (Chief of Staff)"]
-  Quinton["QA Quinton (QA)"]
-  Grace["Gateway Grace (CTO)"]
-  CMO["CMO Bot (not live yet)"]
-  Sally["SEO Sally"]
+flowchart TD
+  Bruno["<b>Bruno Ladan</b><br/>CMO, Five Journeys"]
+  Mark["<b>Mark-stro</b><br/>Chief of Staff"]
+  Quinton["<b>QA Quinton</b><br/>Quality checks"]
+  Grace["<b>Gateway Grace</b><br/>CTO"]
+  CMO["<b>CMO Bot</b><br/><i>planned</i>"]
+  Sally["<b>SEO Sally</b><br/>SEO Specialist"]
   Bruno --> Mark
   Bruno --> Quinton
   Mark --> Grace
   Mark --> CMO
   Mark --> Sally
   CMO --> Sally
+  classDef person fill:#f6ead8,stroke:#8a6a3f,stroke-width:1.5px,color:#3d2c14
+  classDef live fill:#cfe6df,stroke:#1f4a42,stroke-width:3px,color:#10241f
+  classDef planned fill:#ffffff,stroke:#9aa5a2,stroke-width:1.5px,stroke-dasharray:5 4,color:#6b7673
+  class Bruno person
+  class Mark,Quinton,Grace,Sally live
+  class CMO planned
       </pre>
     </div>
     <p class="note">Sally’s solid line to Mark-stro holds until the CMO Bot is live. There are no dotted “works with” lines among Grace, Sally, and Quinton. Their link is the site-change workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</p>
@@ -129,25 +241,29 @@ flowchart TB
     <h2>Vision</h2>
     <p>Bruno remains at the top. A human team reports to him, along with Mark-stro and QA Quinton. Specialist bots report through Mark-stro and the CMO Bot. Dotted lines show who works with whom; they are not a second boss.</p>
 
-    <div class="chart">
-      <pre class="mermaid">
-flowchart TB
-  Bruno["Bruno (CMO, Five Journeys)"]
-  Je["Je (Social Media Planner and Manager)"]
-  Sam["Sam (CRM and Long-form Video)"]
-  Voltaire["Voltaire (Web Content Creator)"]
-  Mark["Mark-stro (Chief of Staff)"]
-  Quinton["QA Quinton (QA)"]
-  Data["Data Manager (reporting and source of truth)"]
-  CMO["CMO Bot"]
-  Grace["Gateway Grace (CTO)"]
-  Sally["SEO Sally"]
-  OrgSocial["Organic Social bot"]
-  CRM["CRM Manager bot (marketing only)"]
-  Paid["Paid Media Lead"]
-  Google["Google Ads Campaign Manager"]
-  Meta["Paid Social (Meta) Campaign Manager"]
-  Retarget["Retargeting Campaign Manager"]
+    <div class="chart-expandable">
+      <button type="button" class="chart-expand-btn" id="vision-expand-btn" aria-haspopup="dialog" aria-controls="vision-lightbox" aria-expanded="false">Expand Vision chart</button>
+      <div class="chart" id="vision-chart" role="button" tabindex="0" aria-label="Vision org chart. Activate to expand full screen." aria-haspopup="dialog" aria-controls="vision-lightbox" aria-expanded="false">
+        <pre class="mermaid">
+flowchart TD
+  Bruno["<b>Bruno Ladan</b><br/>CMO, Five Journeys"]
+  subgraph HUMANS["Human team"]
+    Je["<b>Je</b><br/>Social Media Planner & Manager"]
+    Sam["<b>Sam</b><br/>CRM & Long-form Video"]
+    Voltaire["<b>Voltaire</b><br/>Web Content Creator"]
+  end
+  Mark["<b>Mark-stro</b><br/>Chief of Staff"]
+  Quinton["<b>QA Quinton</b><br/>QA"]
+  Data["<b>Data Manager</b><br/>Reporting & source of truth<br/><i>planned</i>"]
+  CMO["<b>CMO Bot</b><br/><i>planned</i>"]
+  Grace["<b>Gateway Grace</b><br/>CTO"]
+  Sally["<b>SEO Sally</b><br/>SEO Specialist"]
+  OrgSocial["<b>Organic Social bot</b><br/><i>planned</i>"]
+  CRM["<b>CRM Manager bot</b><br/>marketing only<br/><i>planned</i>"]
+  Paid["<b>Paid Media Lead</b><br/><i>planned</i>"]
+  Google["<b>Google Ads</b><br/>Campaign Manager<br/><i>planned</i>"]
+  Meta["<b>Paid Social (Meta)</b><br/>Campaign Manager<br/><i>planned</i>"]
+  Retarget["<b>Retargeting</b><br/>Campaign Manager<br/><i>planned</i>"]
   Bruno --> Je
   Bruno --> Sam
   Bruno --> Voltaire
@@ -163,18 +279,30 @@ flowchart TB
   Paid --> Google
   Paid --> Meta
   Paid --> Retarget
-  Je -.-> OrgSocial
-  Sam -.-> CRM
-  Voltaire -.-> Sally
-      </pre>
+  Je -.- OrgSocial
+  Sam -.- CRM
+  Voltaire -.- Sally
+  classDef person fill:#f6ead8,stroke:#8a6a3f,stroke-width:1.5px,color:#3d2c14
+  classDef live fill:#cfe6df,stroke:#1f4a42,stroke-width:3px,color:#10241f
+  classDef planned fill:#ffffff,stroke:#9aa5a2,stroke-width:1.5px,stroke-dasharray:5 4,color:#6b7673
+  class Bruno,Je,Sam,Voltaire person
+  class Mark,Quinton,Grace,Sally live
+  class Data,CMO,OrgSocial,CRM,Paid,Google,Meta,Retarget planned
+  style HUMANS fill:#fcf7ef,stroke:#c9b28e,color:#3d2c14
+        </pre>
+      </div>
     </div>
 
     <h3>Legend</h3>
     <ul class="legend">
+      <li><span class="sw sw-live"></span> <strong>Live bot</strong>: teal box with a heavy solid border. It is working today.</li>
+      <li><span class="sw sw-planned"></span> <strong>Planned bot</strong>: white box with a dashed border, marked “planned.” It is part of the vision and is not built yet.</li>
+      <li><span class="sw sw-person"></span> <strong>Person</strong>: warm sand box. Humans on the team.</li>
       <li>A solid line means “reports to.”</li>
       <li>A dotted line means “works with.” It is not a second reporting line.</li>
       <li>Bots support people and never manage them.</li>
       <li>Nothing goes out without a person’s or Bruno’s yes.</li>
+      <li>When a planned bot goes live, its box changes from planned to live on both charts.</li>
       <li>There are no dotted lines among Grace, Sally, and Quinton. Their link remains the site-change workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</li>
     </ul>
 
@@ -211,6 +339,13 @@ flowchart TB
     </ul>
     <p class="note">Works with (dotted lines): Je and the Organic Social bot; Sam and the CRM Manager bot; Voltaire and SEO Sally.</p>
   </div>
+  <div class="chart-lightbox" id="vision-lightbox" role="dialog" aria-modal="true" aria-labelledby="vision-lightbox-title" aria-hidden="true" hidden>
+    <div class="chart-lightbox__panel">
+      <button type="button" class="chart-lightbox__close" id="vision-lightbox-close" aria-label="Close Vision chart">Close</button>
+      <h2 id="vision-lightbox-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Vision org chart</h2>
+      <div class="chart-lightbox__stage" id="vision-lightbox-stage" tabindex="0" aria-label="Expanded Vision org chart"></div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
   <script>
     if (window.mermaid) {
@@ -218,6 +353,7 @@ flowchart TB
         startOnLoad: true,
         theme: "base",
         securityLevel: "strict",
+        flowchart: { htmlLabels: true, curve: "basis" },
         themeVariables: {
           fontFamily: "Segoe UI, system-ui, -apple-system, sans-serif",
           primaryColor: "#eef3f1",
@@ -229,6 +365,126 @@ flowchart TB
         }
       });
     }
+
+    (function () {
+      var lightbox = document.getElementById("vision-lightbox");
+      var stage = document.getElementById("vision-lightbox-stage");
+      var closeBtn = document.getElementById("vision-lightbox-close");
+      var expandBtn = document.getElementById("vision-expand-btn");
+      var visionChart = document.getElementById("vision-chart");
+      if (!lightbox || !stage || !closeBtn || !expandBtn || !visionChart) return;
+
+      var lastFocus = null;
+      var open = false;
+
+      function setExpanded(value) {
+        expandBtn.setAttribute("aria-expanded", value ? "true" : "false");
+        visionChart.setAttribute("aria-expanded", value ? "true" : "false");
+      }
+
+      function getFocusable() {
+        return [closeBtn, stage].filter(function (el) {
+          return el && !el.disabled;
+        });
+      }
+
+      function fitClone(svg) {
+        if (!svg || !svg.getAttribute) return;
+        var vb = svg.getAttribute("viewBox");
+        var parts = vb ? vb.split(/[\s,]+/) : null;
+        var naturalW = parts && parts.length === 4 ? parseFloat(parts[2]) : (svg.width && svg.width.baseVal ? svg.width.baseVal.value : 0);
+        var naturalH = parts && parts.length === 4 ? parseFloat(parts[3]) : (svg.height && svg.height.baseVal ? svg.height.baseVal.value : 0);
+        if (!naturalW || !naturalH) return;
+        var availW = Math.max(stage.clientWidth - 16, 120);
+        var availH = Math.max(stage.clientHeight - 16, 120);
+        var scale = Math.min(availW / naturalW, availH / naturalH, 2.25);
+        scale = Math.max(scale, 1);
+        var w = Math.round(naturalW * scale);
+        var h = Math.round(naturalH * scale);
+        svg.style.width = w + "px";
+        svg.style.height = h + "px";
+        svg.style.minWidth = w + "px";
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
+      }
+
+      function openLightbox() {
+        if (open) return;
+        var source = visionChart.querySelector("svg") || visionChart;
+        stage.innerHTML = "";
+        var cloneWrap = document.createElement("div");
+        cloneWrap.className = "chart";
+        var clone = source.cloneNode(true);
+        cloneWrap.appendChild(clone);
+        stage.appendChild(cloneWrap);
+
+        lastFocus = document.activeElement;
+        open = true;
+        setExpanded(true);
+        lightbox.hidden = false;
+        lightbox.setAttribute("aria-hidden", "false");
+        lightbox.classList.add("is-open");
+        document.body.classList.add("chart-lightbox-open");
+        fitClone(clone.tagName && clone.tagName.toLowerCase() === "svg" ? clone : clone.querySelector("svg"));
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        if (!open) return;
+        open = false;
+        setExpanded(false);
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightbox.hidden = true;
+        document.body.classList.remove("chart-lightbox-open");
+        stage.innerHTML = "";
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus();
+        } else {
+          expandBtn.focus();
+        }
+      }
+
+      expandBtn.addEventListener("click", openLightbox);
+      visionChart.addEventListener("click", function (event) {
+        if (event.target.closest("a")) return;
+        openLightbox();
+      });
+      visionChart.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox();
+        }
+      });
+      closeBtn.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (!open) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeLightbox();
+          return;
+        }
+        if (event.key === "Tab") {
+          var focusable = getFocusable();
+          if (!focusable.length) {
+            event.preventDefault();
+            return;
+          }
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
