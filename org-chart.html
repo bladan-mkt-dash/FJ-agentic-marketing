@@ -70,6 +70,107 @@
       overflow-x: auto;
       padding: 0.85rem 0.75rem;
     }
+    .chart-expandable {
+      margin: 0.75rem 0 0.35rem;
+    }
+    .chart-expandable .chart {
+      cursor: zoom-in;
+      margin: 0;
+    }
+    .chart-expandable .chart:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .chart-expand-btn {
+      background: transparent;
+      border: 1px solid var(--wire);
+      border-radius: 0.25rem;
+      color: var(--accent);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      padding: 0.35rem 0.65rem;
+    }
+    .chart-expand-btn:hover { border-color: var(--accent); }
+    .chart-expand-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .chart-lightbox {
+      align-items: stretch;
+      background: rgba(26, 46, 42, 0.72);
+      border: 0;
+      display: none;
+      inset: 0;
+      justify-content: center;
+      margin: 0;
+      max-height: none;
+      max-width: none;
+      padding: clamp(0.75rem, 3vw, 1.75rem);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+    .chart-lightbox.is-open {
+      display: flex;
+    }
+    .chart-lightbox__panel {
+      background: var(--surface-warm);
+      border: 1px solid var(--wire);
+      box-shadow: 0 0.5rem 2rem rgba(26, 46, 42, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      min-height: 0;
+      position: relative;
+      width: 100%;
+    }
+    .chart-lightbox__close {
+      align-self: flex-end;
+      background: var(--white);
+      border: 1px solid var(--wire);
+      border-radius: 0.25rem;
+      color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin: 0.65rem 0.65rem 0;
+      padding: 0.4rem 0.7rem;
+      z-index: 1;
+    }
+    .chart-lightbox__close:hover { border-color: var(--accent); }
+    .chart-lightbox__close:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .chart-lightbox__stage {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 0.5rem 0.75rem 0.85rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chart-lightbox__stage .chart {
+      border: 0;
+      margin: 0;
+      min-width: min-content;
+      overflow: visible;
+      padding: 0.5rem;
+    }
+    .chart-lightbox__stage .mermaid,
+    .chart-lightbox__stage svg {
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      max-width: none;
+    }
+    body.chart-lightbox-open { overflow: hidden; }
     .legend li { margin: 0.25rem 0; }
     noscript p { font-size: 0.875rem; margin: 0.5rem 0 0; }
   </style>
@@ -129,25 +230,27 @@ flowchart TB
     <h2>Vision</h2>
     <p>Bruno remains at the top. A human team reports to him, along with Mark-stro and QA Quinton. Specialist bots report through Mark-stro and the CMO Bot. Dotted lines show who works with whom; they are not a second boss.</p>
 
-    <div class="chart">
-      <pre class="mermaid">
+    <div class="chart-expandable">
+      <button type="button" class="chart-expand-btn" id="vision-expand-btn" aria-haspopup="dialog" aria-controls="vision-lightbox" aria-expanded="false">Expand Vision chart</button>
+      <div class="chart" id="vision-chart" role="button" tabindex="0" aria-label="Vision org chart. Activate to expand full screen." aria-haspopup="dialog" aria-controls="vision-lightbox" aria-expanded="false">
+        <pre class="mermaid">
 flowchart TB
   Bruno["Bruno (CMO, Five Journeys)"]
-  Je["Je (Social Media Planner and Manager)"]
-  Sam["Sam (CRM and Long-form Video)"]
-  Voltaire["Voltaire (Web Content Creator)"]
+  Je["Je (Social Media Planner<br/>and Manager)"]
+  Sam["Sam (CRM and<br/>Long-form Video)"]
+  Voltaire["Voltaire<br/>(Web Content Creator)"]
   Mark["Mark-stro (Chief of Staff)"]
   Quinton["QA Quinton (QA)"]
-  Data["Data Manager (reporting and source of truth)"]
+  Data["Data Manager<br/>(reporting and<br/>source of truth)"]
   CMO["CMO Bot"]
   Grace["Gateway Grace (CTO)"]
   Sally["SEO Sally"]
   OrgSocial["Organic Social bot"]
-  CRM["CRM Manager bot (marketing only)"]
+  CRM["CRM Manager bot<br/>(marketing only)"]
   Paid["Paid Media Lead"]
-  Google["Google Ads Campaign Manager"]
-  Meta["Paid Social (Meta) Campaign Manager"]
-  Retarget["Retargeting Campaign Manager"]
+  Google["Google Ads<br/>Campaign Manager"]
+  Meta["Paid Social (Meta)<br/>Campaign Manager"]
+  Retarget["Retargeting<br/>Campaign Manager"]
   Bruno --> Je
   Bruno --> Sam
   Bruno --> Voltaire
@@ -166,7 +269,8 @@ flowchart TB
   Je -.-> OrgSocial
   Sam -.-> CRM
   Voltaire -.-> Sally
-      </pre>
+        </pre>
+      </div>
     </div>
 
     <h3>Legend</h3>
@@ -211,6 +315,13 @@ flowchart TB
     </ul>
     <p class="note">Works with (dotted lines): Je and the Organic Social bot; Sam and the CRM Manager bot; Voltaire and SEO Sally.</p>
   </div>
+  <div class="chart-lightbox" id="vision-lightbox" role="dialog" aria-modal="true" aria-labelledby="vision-lightbox-title" aria-hidden="true" hidden>
+    <div class="chart-lightbox__panel">
+      <button type="button" class="chart-lightbox__close" id="vision-lightbox-close" aria-label="Close Vision chart">Close</button>
+      <h2 id="vision-lightbox-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Vision org chart</h2>
+      <div class="chart-lightbox__stage" id="vision-lightbox-stage" tabindex="0" aria-label="Expanded Vision org chart"></div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
   <script>
     if (window.mermaid) {
@@ -218,8 +329,16 @@ flowchart TB
         startOnLoad: true,
         theme: "base",
         securityLevel: "strict",
+        flowchart: {
+          htmlLabels: true,
+          wrappingWidth: 220,
+          nodeSpacing: 36,
+          rankSpacing: 48,
+          padding: 12
+        },
         themeVariables: {
           fontFamily: "Segoe UI, system-ui, -apple-system, sans-serif",
+          fontSize: "15px",
           primaryColor: "#eef3f1",
           primaryTextColor: "#1a2e2a",
           primaryBorderColor: "#264540",
@@ -229,6 +348,126 @@ flowchart TB
         }
       });
     }
+
+    (function () {
+      var lightbox = document.getElementById("vision-lightbox");
+      var stage = document.getElementById("vision-lightbox-stage");
+      var closeBtn = document.getElementById("vision-lightbox-close");
+      var expandBtn = document.getElementById("vision-expand-btn");
+      var visionChart = document.getElementById("vision-chart");
+      if (!lightbox || !stage || !closeBtn || !expandBtn || !visionChart) return;
+
+      var lastFocus = null;
+      var open = false;
+
+      function setExpanded(value) {
+        expandBtn.setAttribute("aria-expanded", value ? "true" : "false");
+        visionChart.setAttribute("aria-expanded", value ? "true" : "false");
+      }
+
+      function getFocusable() {
+        return [closeBtn, stage].filter(function (el) {
+          return el && !el.disabled;
+        });
+      }
+
+      function fitClone(svg) {
+        if (!svg || !svg.getAttribute) return;
+        var vb = svg.getAttribute("viewBox");
+        var parts = vb ? vb.split(/[\s,]+/) : null;
+        var naturalW = parts && parts.length === 4 ? parseFloat(parts[2]) : (svg.width && svg.width.baseVal ? svg.width.baseVal.value : 0);
+        var naturalH = parts && parts.length === 4 ? parseFloat(parts[3]) : (svg.height && svg.height.baseVal ? svg.height.baseVal.value : 0);
+        if (!naturalW || !naturalH) return;
+        var availW = Math.max(stage.clientWidth - 16, 120);
+        var availH = Math.max(stage.clientHeight - 16, 120);
+        var scale = Math.min(availW / naturalW, availH / naturalH, 2.25);
+        scale = Math.max(scale, 1);
+        var w = Math.round(naturalW * scale);
+        var h = Math.round(naturalH * scale);
+        svg.style.width = w + "px";
+        svg.style.height = h + "px";
+        svg.style.minWidth = w + "px";
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
+      }
+
+      function openLightbox() {
+        if (open) return;
+        var source = visionChart.querySelector("svg") || visionChart;
+        stage.innerHTML = "";
+        var cloneWrap = document.createElement("div");
+        cloneWrap.className = "chart";
+        var clone = source.cloneNode(true);
+        cloneWrap.appendChild(clone);
+        stage.appendChild(cloneWrap);
+
+        lastFocus = document.activeElement;
+        open = true;
+        setExpanded(true);
+        lightbox.hidden = false;
+        lightbox.setAttribute("aria-hidden", "false");
+        lightbox.classList.add("is-open");
+        document.body.classList.add("chart-lightbox-open");
+        fitClone(clone.tagName && clone.tagName.toLowerCase() === "svg" ? clone : clone.querySelector("svg"));
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        if (!open) return;
+        open = false;
+        setExpanded(false);
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightbox.hidden = true;
+        document.body.classList.remove("chart-lightbox-open");
+        stage.innerHTML = "";
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus();
+        } else {
+          expandBtn.focus();
+        }
+      }
+
+      expandBtn.addEventListener("click", openLightbox);
+      visionChart.addEventListener("click", function (event) {
+        if (event.target.closest("a")) return;
+        openLightbox();
+      });
+      visionChart.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox();
+        }
+      });
+      closeBtn.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (!open) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeLightbox();
+          return;
+        }
+        if (event.key === "Tab") {
+          var focusable = getFocusable();
+          if (!focusable.length) {
+            event.preventDefault();
+            return;
+          }
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
