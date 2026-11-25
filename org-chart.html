@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Maintenance: when a bot goes live with a job description, move it from "class ... planned" to "class ... live" in BOTH charts, remove its "planned" label, and link its page. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -173,6 +174,10 @@
     body.chart-lightbox-open { overflow: hidden; }
     .legend li { margin: 0.25rem 0; }
     noscript p { font-size: 0.875rem; margin: 0.5rem 0 0; }
+  .sw{display:inline-block;width:18px;height:12px;border-radius:3px;vertical-align:middle;margin-right:4px}
+    .sw-live{background:#cfe6df;border:3px solid #1f4a42}
+    .sw-planned{background:#fff;border:1.5px dashed #9aa5a2}
+    .sw-person{background:#f6ead8;border:1.5px solid #8a6a3f}
   </style>
 </head>
 <body>
@@ -189,19 +194,25 @@
     <noscript><p>The drawing below needs JavaScript. The text version under it is complete.</p></noscript>
     <div class="chart">
       <pre class="mermaid">
-flowchart TB
-  Bruno["Bruno (CMO, Five Journeys)"]
-  Mark["Mark-stro (Chief of Staff)"]
-  Quinton["QA Quinton (QA)"]
-  Grace["Gateway Grace (CTO)"]
-  CMO["CMO Bot (not live yet)"]
-  Sally["SEO Sally"]
+flowchart TD
+  Bruno["<b>Bruno Ladan</b><br/>CMO, Five Journeys"]
+  Mark["<b>Mark-stro</b><br/>Chief of Staff"]
+  Quinton["<b>QA Quinton</b><br/>Quality checks"]
+  Grace["<b>Gateway Grace</b><br/>CTO"]
+  CMO["<b>CMO Bot</b><br/><i>planned</i>"]
+  Sally["<b>SEO Sally</b><br/>SEO Specialist"]
   Bruno --> Mark
   Bruno --> Quinton
   Mark --> Grace
   Mark --> CMO
   Mark --> Sally
   CMO --> Sally
+  classDef person fill:#f6ead8,stroke:#8a6a3f,stroke-width:1.5px,color:#3d2c14
+  classDef live fill:#cfe6df,stroke:#1f4a42,stroke-width:3px,color:#10241f
+  classDef planned fill:#ffffff,stroke:#9aa5a2,stroke-width:1.5px,stroke-dasharray:5 4,color:#6b7673
+  class Bruno person
+  class Mark,Quinton,Grace,Sally live
+  class CMO planned
       </pre>
     </div>
     <p class="note">Sally’s solid line to Mark-stro holds until the CMO Bot is live. There are no dotted “works with” lines among Grace, Sally, and Quinton. Their link is the site-change workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</p>
@@ -234,23 +245,25 @@ flowchart TB
       <button type="button" class="chart-expand-btn" id="vision-expand-btn" aria-haspopup="dialog" aria-controls="vision-lightbox" aria-expanded="false">Expand Vision chart</button>
       <div class="chart" id="vision-chart" role="button" tabindex="0" aria-label="Vision org chart. Activate to expand full screen." aria-haspopup="dialog" aria-controls="vision-lightbox" aria-expanded="false">
         <pre class="mermaid">
-flowchart TB
-  Bruno["Bruno (CMO, Five Journeys)"]
-  Je["Je (Social Media Planner<br/>and Manager)"]
-  Sam["Sam (CRM and<br/>Long-form Video)"]
-  Voltaire["Voltaire<br/>(Web Content Creator)"]
-  Mark["Mark-stro (Chief of Staff)"]
-  Quinton["QA Quinton (QA)"]
-  Data["Data Manager<br/>(reporting and<br/>source of truth)"]
-  CMO["CMO Bot"]
-  Grace["Gateway Grace (CTO)"]
-  Sally["SEO Sally"]
-  OrgSocial["Organic Social bot"]
-  CRM["CRM Manager bot<br/>(marketing only)"]
-  Paid["Paid Media Lead"]
-  Google["Google Ads<br/>Campaign Manager"]
-  Meta["Paid Social (Meta)<br/>Campaign Manager"]
-  Retarget["Retargeting<br/>Campaign Manager"]
+flowchart TD
+  Bruno["<b>Bruno Ladan</b><br/>CMO, Five Journeys"]
+  subgraph HUMANS["Human team"]
+    Je["<b>Je</b><br/>Social Media Planner & Manager"]
+    Sam["<b>Sam</b><br/>CRM & Long-form Video"]
+    Voltaire["<b>Voltaire</b><br/>Web Content Creator"]
+  end
+  Mark["<b>Mark-stro</b><br/>Chief of Staff"]
+  Quinton["<b>QA Quinton</b><br/>QA"]
+  Data["<b>Data Manager</b><br/>Reporting & source of truth<br/><i>planned</i>"]
+  CMO["<b>CMO Bot</b><br/><i>planned</i>"]
+  Grace["<b>Gateway Grace</b><br/>CTO"]
+  Sally["<b>SEO Sally</b><br/>SEO Specialist"]
+  OrgSocial["<b>Organic Social bot</b><br/><i>planned</i>"]
+  CRM["<b>CRM Manager bot</b><br/>marketing only<br/><i>planned</i>"]
+  Paid["<b>Paid Media Lead</b><br/><i>planned</i>"]
+  Google["<b>Google Ads</b><br/>Campaign Manager<br/><i>planned</i>"]
+  Meta["<b>Paid Social (Meta)</b><br/>Campaign Manager<br/><i>planned</i>"]
+  Retarget["<b>Retargeting</b><br/>Campaign Manager<br/><i>planned</i>"]
   Bruno --> Je
   Bruno --> Sam
   Bruno --> Voltaire
@@ -266,19 +279,30 @@ flowchart TB
   Paid --> Google
   Paid --> Meta
   Paid --> Retarget
-  Je -.-> OrgSocial
-  Sam -.-> CRM
-  Voltaire -.-> Sally
+  Je -.- OrgSocial
+  Sam -.- CRM
+  Voltaire -.- Sally
+  classDef person fill:#f6ead8,stroke:#8a6a3f,stroke-width:1.5px,color:#3d2c14
+  classDef live fill:#cfe6df,stroke:#1f4a42,stroke-width:3px,color:#10241f
+  classDef planned fill:#ffffff,stroke:#9aa5a2,stroke-width:1.5px,stroke-dasharray:5 4,color:#6b7673
+  class Bruno,Je,Sam,Voltaire person
+  class Mark,Quinton,Grace,Sally live
+  class Data,CMO,OrgSocial,CRM,Paid,Google,Meta,Retarget planned
+  style HUMANS fill:#fcf7ef,stroke:#c9b28e,color:#3d2c14
         </pre>
       </div>
     </div>
 
     <h3>Legend</h3>
     <ul class="legend">
+      <li><span class="sw sw-live"></span> <strong>Live bot</strong>: teal box with a heavy solid border. It is working today.</li>
+      <li><span class="sw sw-planned"></span> <strong>Planned bot</strong>: white box with a dashed border, marked “planned.” It is part of the vision and is not built yet.</li>
+      <li><span class="sw sw-person"></span> <strong>Person</strong>: warm sand box. Humans on the team.</li>
       <li>A solid line means “reports to.”</li>
       <li>A dotted line means “works with.” It is not a second reporting line.</li>
       <li>Bots support people and never manage them.</li>
       <li>Nothing goes out without a person’s or Bruno’s yes.</li>
+      <li>When a planned bot goes live, its box changes from planned to live on both charts.</li>
       <li>There are no dotted lines among Grace, Sally, and Quinton. Their link remains the site-change workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</li>
     </ul>
 
@@ -329,16 +353,9 @@ flowchart TB
         startOnLoad: true,
         theme: "base",
         securityLevel: "strict",
-        flowchart: {
-          htmlLabels: true,
-          wrappingWidth: 220,
-          nodeSpacing: 36,
-          rankSpacing: 48,
-          padding: 12
-        },
+        flowchart: { htmlLabels: true, curve: "basis" },
         themeVariables: {
           fontFamily: "Segoe UI, system-ui, -apple-system, sans-serif",
-          fontSize: "15px",
           primaryColor: "#eef3f1",
           primaryTextColor: "#1a2e2a",
           primaryBorderColor: "#264540",
