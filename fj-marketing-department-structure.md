@@ -1,5 +1,7 @@
 # FJ Marketing Department Structure
 
+The reporting chart — current state and vision — is on the [marketing org chart](org-chart.html) page. This page is the department write-up: people, agents, and how a lap is judged.
+
 ## People hold the judgment
 
 Ed and Wendie hold the company goal. **Bruno Ladan, VP of Marketing,** holds the department, the promise, the budget, and Ready for Publishing. Under him: **Je** (organic social), **Sam** (email, podcast, CRM), **Voltaire** (blog and on-page words), and **Zigimedia** (social media advertising). Google, the website, legacy, events, print, connected TV, and referrals sit in the same department and on the same ladder.
