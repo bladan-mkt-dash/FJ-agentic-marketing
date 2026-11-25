@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Journeys — Marketing org chart</title>
+  <style>
+    :root {
+      --ink: #1a2e2a;
+      --ink-muted: #3d524c;
+      --surface-alt: #eef3f1;
+      --surface-warm: #faf8f5;
+      --accent: #264540;
+      --accent-soft: #5da68a;
+      --wire: #b8c9c3;
+      --wire-label: #6b7f78;
+      --white: #ffffff;
+      --max: 46rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+    }
+    .banner {
+      background: var(--surface-alt);
+      border-bottom: 1px dashed var(--wire);
+      color: var(--wire-label);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 1.25rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .wrap { margin: 0 auto; max-width: var(--max); padding: 2rem 1.25rem 4rem; }
+    .back {
+      color: var(--accent);
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      text-decoration: none;
+    }
+    .back:hover { text-decoration: underline; }
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 0.5rem;
+    }
+    h2 { font-size: 1.05rem; letter-spacing: -0.01em; margin: 1.75rem 0 0.5rem; }
+    h3 { font-size: 0.975rem; letter-spacing: -0.01em; margin: 1.25rem 0 0.35rem; }
+    p, li { color: var(--ink-muted); font-size: 0.975rem; }
+    .lede { margin: 0 0 1rem; }
+    ul, ol { margin: 0.35rem 0 0; padding-left: 1.2rem; }
+    li { margin: 0.45rem 0; }
+    .note { font-size: 0.8125rem; margin: 1rem 0 0; }
+    a { color: var(--accent); }
+    .related {
+      font-size: 0.875rem;
+      margin: -0.5rem 0 1.25rem;
+    }
+    .chart {
+      background: var(--surface-warm);
+      border: 1px dashed var(--wire);
+      margin: 0.75rem 0 0.35rem;
+      overflow-x: auto;
+      padding: 0.85rem 0.75rem;
+    }
+    .legend li { margin: 0.25rem 0; }
+    noscript p { font-size: 0.875rem; margin: 0.5rem 0 0; }
+  </style>
+</head>
+<body>
+  <div class="banner">Internal · Marketing org chart</div>
+  <div class="wrap">
+    <a class="back" href="index.html">FJ Agentic Marketing Home</a>
+    <p class="related"><a href="chief-of-staff.html">Chief of Staff</a> · <a href="cto.html">CTO</a> · <a href="seo-sally.html">SEO Sally</a> · <a href="fj-marketing-department-structure.html">Department structure</a></p>
+    <h1>Marketing org chart</h1>
+    <p class="lede">Two views of Five Journeys marketing. The current-state chart was approved Nov 24, 2026. The vision chart is the intended structure, not a claim that every seat is already live. People are shown by first name. Bots are named as they are known in the department.</p>
+
+    <h2>Current state (approved Nov 24, 2026)</h2>
+    <p>Bruno (CMO, Five Journeys) sits at the top. Mark-stro (Chief of Staff) and QA Quinton (QA) report to Bruno. Gateway Grace (CTO) and the CMO Bot (not live yet) report to Mark-stro. SEO Sally reports to the CMO Bot, and to Mark-stro until the CMO Bot is live.</p>
+
+    <noscript><p>The drawing below needs JavaScript. The text version under it is complete.</p></noscript>
+    <div class="chart">
+      <pre class="mermaid">
+flowchart TB
+  Bruno["Bruno (CMO, Five Journeys)"]
+  Mark["Mark-stro (Chief of Staff)"]
+  Quinton["QA Quinton (QA)"]
+  Grace["Gateway Grace (CTO)"]
+  CMO["CMO Bot (not live yet)"]
+  Sally["SEO Sally"]
+  Bruno --> Mark
+  Bruno --> Quinton
+  Mark --> Grace
+  Mark --> CMO
+  Mark --> Sally
+  CMO --> Sally
+      </pre>
+    </div>
+    <p class="note">Sally’s solid line to Mark-stro holds until the CMO Bot is live. There are no dotted “works with” lines among Grace, Sally, and Quinton. Their link is the site-change workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</p>
+
+    <h3>Text version</h3>
+    <ul>
+      <li>Bruno (CMO, Five Journeys)
+        <ul>
+          <li>Mark-stro (Chief of Staff)
+            <ul>
+              <li>Gateway Grace (CTO)</li>
+              <li>CMO Bot (not live yet)
+                <ul>
+                  <li>SEO Sally (also reports to Mark-stro until the CMO Bot is live)</li>
+                </ul>
+              </li>
+              <li>SEO Sally, until the CMO Bot is live</li>
+            </ul>
+          </li>
+          <li>QA Quinton (QA)</li>
+        </ul>
+      </li>
+    </ul>
+    <p class="note">Workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</p>
+
+    <h2>Vision</h2>
+    <p>Bruno remains at the top. A human team reports to him, along with Mark-stro and QA Quinton. Specialist bots report through Mark-stro and the CMO Bot. Dotted lines show who works with whom; they are not a second boss.</p>
+
+    <div class="chart">
+      <pre class="mermaid">
+flowchart TB
+  Bruno["Bruno (CMO, Five Journeys)"]
+  Je["Je (Social Media Planner and Manager)"]
+  Sam["Sam (CRM and Long-form Video)"]
+  Voltaire["Voltaire (Web Content Creator)"]
+  Mark["Mark-stro (Chief of Staff)"]
+  Quinton["QA Quinton (QA)"]
+  Data["Data Manager (reporting and source of truth)"]
+  CMO["CMO Bot"]
+  Grace["Gateway Grace (CTO)"]
+  Sally["SEO Sally"]
+  OrgSocial["Organic Social bot"]
+  CRM["CRM Manager bot (marketing only)"]
+  Paid["Paid Media Lead"]
+  Google["Google Ads Campaign Manager"]
+  Meta["Paid Social (Meta) Campaign Manager"]
+  Retarget["Retargeting Campaign Manager"]
+  Bruno --> Je
+  Bruno --> Sam
+  Bruno --> Voltaire
+  Bruno --> Mark
+  Bruno --> Quinton
+  Mark --> Data
+  Mark --> CMO
+  Mark --> Grace
+  CMO --> Sally
+  CMO --> OrgSocial
+  CMO --> CRM
+  CMO --> Paid
+  Paid --> Google
+  Paid --> Meta
+  Paid --> Retarget
+  Je -.-> OrgSocial
+  Sam -.-> CRM
+  Voltaire -.-> Sally
+      </pre>
+    </div>
+
+    <h3>Legend</h3>
+    <ul class="legend">
+      <li>A solid line means “reports to.”</li>
+      <li>A dotted line means “works with.” It is not a second reporting line.</li>
+      <li>Bots support people and never manage them.</li>
+      <li>Nothing goes out without a person’s or Bruno’s yes.</li>
+      <li>There are no dotted lines among Grace, Sally, and Quinton. Their link remains the site-change workflow: Sally finds, Grace builds on staging, Quinton tests, Bruno approves.</li>
+    </ul>
+
+    <h3>Text version</h3>
+    <ul>
+      <li>Bruno (CMO, Five Journeys)
+        <ul>
+          <li>Je (Social Media Planner &amp; Manager)</li>
+          <li>Sam (CRM &amp; Long-form Video)</li>
+          <li>Voltaire (Web Content Creator)</li>
+          <li>Mark-stro (Chief of Staff)
+            <ul>
+              <li>Data Manager (reporting &amp; source of truth)</li>
+              <li>CMO Bot
+                <ul>
+                  <li>SEO Sally</li>
+                  <li>Organic Social bot</li>
+                  <li>CRM Manager bot (marketing only)</li>
+                  <li>Paid Media Lead
+                    <ul>
+                      <li>Google Ads Campaign Manager</li>
+                      <li>Paid Social (Meta) Campaign Manager</li>
+                      <li>Retargeting Campaign Manager</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Gateway Grace (CTO)</li>
+            </ul>
+          </li>
+          <li>QA Quinton (QA)</li>
+        </ul>
+      </li>
+    </ul>
+    <p class="note">Works with (dotted lines): Je and the Organic Social bot; Sam and the CRM Manager bot; Voltaire and SEO Sally.</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "base",
+        securityLevel: "strict",
+        themeVariables: {
+          fontFamily: "Segoe UI, system-ui, -apple-system, sans-serif",
+          primaryColor: "#eef3f1",
+          primaryTextColor: "#1a2e2a",
+          primaryBorderColor: "#264540",
+          lineColor: "#264540",
+          secondaryColor: "#faf8f5",
+          tertiaryColor: "#ffffff"
+        }
+      });
+    }
+  </script>
+</body>
+</html>
